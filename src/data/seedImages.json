@@ -1,0 +1,704 @@
+{
+  "Taj Mahal": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Taj_Mahal_%28Edited%29.jpeg/1920px-Taj_Mahal_%28Edited%29.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Yann; edited by Jim Carter",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Taj_Mahal_(Edited).jpeg"
+    }
+  },
+  "Eiffel Tower": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg/1920px-Tour_Eiffel_Wikimedia_Commons_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Benh LIEU SONG",
+      "license": "public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tour_Eiffel_Wikimedia_Commons_(cropped).jpg"
+    }
+  },
+  "Colosseum": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1920px-Colosseo_2020.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "FeaturedPics",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Colosseo_2020.jpg"
+    }
+  },
+  "Statue of Liberty": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Front_view_of_Statue_of_Liberty_%28cropped%29.jpg/1920px-Front_view_of_Statue_of_Liberty_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "AskALotl",
+      "license": "cc0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Front_view_of_Statue_of_Liberty_(cropped).jpg"
+    }
+  },
+  "Sydney Opera House": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Sydney_Australia._%2821339175489%29.jpg/1920px-Sydney_Australia._%2821339175489%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Bernard Spragg. NZ from Christchurch, New Zealand",
+      "license": "cc0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sydney_Australia._(21339175489).jpg"
+    }
+  },
+  "Big Ben": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Elizabeth_Tower%2C_June_2022.jpg/1920px-Elizabeth_Tower%2C_June_2022.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Dave Bezaire",
+      "license": "cc by-sa 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Elizabeth_Tower,_June_2022.jpg"
+    }
+  },
+  "Burj Khalifa": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Burj_Khalifa_%28worlds_tallest_building%29_and_the_Dubai_skyline_%2825781049892%29.jpg/1920px-Burj_Khalifa_%28worlds_tallest_building%29_and_the_Dubai_skyline_%2825781049892%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "imran shahabuddin",
+      "license": "cc by 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Burj_Khalifa_(worlds_tallest_building)_and_the_Dubai_skyline_(25781049892).jpg"
+    }
+  },
+  "Great Wall of China": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/The_Great_Wall_of_China_at_Jinshanling-edit.jpg/1920px-The_Great_Wall_of_China_at_Jinshanling-edit.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Severin.stalder",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Great_Wall_of_China_at_Jinshanling-edit.jpg"
+    }
+  },
+  "Machu Picchu": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Machu_Picchu%2C_2023_%28012%29.jpg/1920px-Machu_Picchu%2C_2023_%28012%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Draceane",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Machu_Picchu,_2023_(012).jpg"
+    }
+  },
+  "Pyramids of Giza": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Pyramids_of_the_Giza_Necropolis.jpg/1920px-Pyramids_of_the_Giza_Necropolis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "KennyOMG",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pyramids_of_the_Giza_Necropolis.jpg"
+    }
+  },
+  "Mount Fuji": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/View_of_Mount_Fuji_from_%C5%8Cwakudani_20211202.jpg/1920px-View_of_Mount_Fuji_from_%C5%8Cwakudani_20211202.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Suicasmo",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:View_of_Mount_Fuji_from_%C5%8Cwakudani_20211202.jpg"
+    }
+  },
+  "Petra": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Al_Deir_Petra.JPG/1920px-Al_Deir_Petra.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Azurfrog",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Al_Deir_Petra.JPG"
+    }
+  },
+  "Acropolis of Athens": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/1029_Acropolis_of_Athens_in_Greece_at_night_Photo_by_Giles_Laurent.jpg/1920px-1029_Acropolis_of_Athens_in_Greece_at_night_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Giles Laurent",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:1029_Acropolis_of_Athens_in_Greece_at_night_Photo_by_Giles_Laurent.jpg"
+    }
+  },
+  "Sagrada Familia": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/%CE%A3%CE%B1%CE%B3%CF%81%CE%AC%CE%B4%CE%B1_%CE%A6%CE%B1%CE%BC%CE%AF%CE%BB%CE%B9%CE%B1_2941.jpg/1920px-%CE%A3%CE%B1%CE%B3%CF%81%CE%AC%CE%B4%CE%B1_%CE%A6%CE%B1%CE%BC%CE%AF%CE%BB%CE%B9%CE%B1_2941.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "C messier",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:%CE%A3%CE%B1%CE%B3%CF%81%CE%AC%CE%B4%CE%B1_%CE%A6%CE%B1%CE%BC%CE%AF%CE%BB%CE%B9%CE%B1_2941.jpg"
+    }
+  },
+  "Brandenburg Gate": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Brandenburger_Tor_abends.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "attribution": {
+      "artist": "Thomas Wolf, www.foto-tw.de",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brandenburger_Tor_abends.jpg"
+    }
+  },
+  "Red Square": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Kremlin_and_Red_Square.1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "attribution": {
+      "artist": "mos.ru",
+      "license": "cc by 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kremlin_and_Red_Square.1.jpg"
+    }
+  },
+  "Chichen Itza": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Chichen_Itza_3.jpg/1920px-Chichen_Itza_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Daniel Schwen",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chichen_Itza_3.jpg"
+    }
+  },
+  "Table Mountain": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Table_Mountain_DanieVDM.jpg/1920px-Table_Mountain_DanieVDM.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Danie van der Merwe from Cape Town, South Africa",
+      "license": "cc by 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Table_Mountain_DanieVDM.jpg"
+    }
+  },
+  "Angkor Wat": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Buddhist_monks_in_front_of_the_Angkor_Wat.jpg/1920px-Buddhist_monks_in_front_of_the_Angkor_Wat.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "sam garza",
+      "license": "cc by 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Buddhist_monks_in_front_of_the_Angkor_Wat.jpg"
+    }
+  },
+  "Hagia Sophia": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Hagia_Sophia_%28228968325%29.jpeg/1920px-Hagia_Sophia_%28228968325%29.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Adli Wahid",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hagia_Sophia_(228968325).jpeg"
+    }
+  },
+  "Neuschwanstein Castle": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Schloss_Neuschwanstein_2013.jpg/1920px-Schloss_Neuschwanstein_2013.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Thomas Wolf, www.foto-tw.de",
+      "license": "cc by-sa 3.0 de",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Schloss_Neuschwanstein_2013.jpg"
+    }
+  },
+  "Stonehenge": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Stonehenge2007_07_30.jpg/1920px-Stonehenge2007_07_30.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "garethwiscombe",
+      "license": "cc by 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stonehenge2007_07_30.jpg"
+    }
+  },
+  "Mount Rushmore": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Mount_Rushmore_detail_view_%28100MP%29.jpg/1920px-Mount_Rushmore_detail_view_%28100MP%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Thomas Wolf, www.foto-tw.de",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mount_Rushmore_detail_view_(100MP).jpg"
+    }
+  },
+  "Niagara Falls": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/3Falls_Niagara.jpg/1920px-3Falls_Niagara.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Saffron Blaze",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:3Falls_Niagara.jpg"
+    }
+  },
+  "Forbidden City": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/The_Forbidden_City_-_View_from_Coal_Hill.jpg/1920px-The_Forbidden_City_-_View_from_Coal_Hill.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Pixelflake",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Forbidden_City_-_View_from_Coal_Hill.jpg"
+    }
+  },
+  "Marina Bay Sands": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Marina_Bay_Sands_%28I%29.jpg/1920px-Marina_Bay_Sands_%28I%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "This Photo was taken by Supanut Arunoprayote. Feel free to use any of my images, but please mention me as the author and may send me a message. (สามารถใช้ภาพได้อิสระ แต่กรุณาใส่เครดิตผู้ถ่ายและอาจส่งข้อความบอกกล่าวด้วย) Please do not upload an updated image here without consultation with the Author. The author would like to make corrections only at his own source. This ensures that the changes are preserved.Please if you think that any changes should be required, please inform the author.Otherwise you can upload a new image with a new name. Please use one of the templates derivative or extract.",
+      "license": "cc by 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Marina_Bay_Sands_(I).jpg"
+    }
+  },
+  "Mecca Grand Mosque": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Great_Mosque_of_Mecca1.jpg/1920px-Great_Mosque_of_Mecca1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Saudipics.com",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Great_Mosque_of_Mecca1.jpg"
+    }
+  },
+  "Iguazu Falls": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Iguazu_Cataratas2.jpg/1920px-Iguazu_Cataratas2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Enaldo Valadares",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Iguazu_Cataratas2.jpg"
+    }
+  },
+  "Santorini": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/2011_Dimos_Thiras.png/1920px-2011_Dimos_Thiras.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Pitichinaccio",
+      "license": "cc by 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2011_Dimos_Thiras.png"
+    }
+  },
+  "Tower Bridge": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Tower_Bridge_at_Dawn.jpg/1920px-Tower_Bridge_at_Dawn.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Fuzzypiggy",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tower_Bridge_at_Dawn.jpg"
+    }
+  },
+  "Golden Gate Bridge": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Golden_Gate_Bridge_as_seen_from_Battery_East.jpg/1920px-Golden_Gate_Bridge_as_seen_from_Battery_East.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Frank Schulenburg",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Golden_Gate_Bridge_as_seen_from_Battery_East.jpg"
+    }
+  },
+  "Leaning Tower of Pisa": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Italy_-_Pisa_-_Leaning_Tower.jpg/1920px-Italy_-_Pisa_-_Leaning_Tower.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Arne Müseler",
+      "license": "cc by-sa 3.0 de",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Italy_-_Pisa_-_Leaning_Tower.jpg"
+    }
+  },
+  "Buckingham Palace": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Buckingham_Palace_London_Morning_2020_01_%28cropped%29.jpg/1920px-Buckingham_Palace_London_Morning_2020_01_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Julian Herzog (Website)",
+      "license": "cc by 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Buckingham_Palace_London_Morning_2020_01_(cropped).jpg"
+    }
+  },
+  "Banff National Park": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Moraine_Lake_17092005.jpg/1920px-Moraine_Lake_17092005.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Gorgo",
+      "license": "public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Moraine_Lake_17092005.jpg"
+    }
+  },
+  "Victoria Falls": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Cataratas_Victoria%2C_Zambia-Zimbabue%2C_2018-07-27%2C_DD_04.jpg/1920px-Cataratas_Victoria%2C_Zambia-Zimbabue%2C_2018-07-27%2C_DD_04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Diego Delso",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cataratas_Victoria,_Zambia-Zimbabue,_2018-07-27,_DD_04.jpg"
+    }
+  },
+  "Mount Kilimanjaro": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Kilimanjaro_from_Amboseli.jpg/1920px-Kilimanjaro_from_Amboseli.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Sergey Pesterev",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kilimanjaro_from_Amboseli.jpg"
+    }
+  },
+  "Easter Island": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Easter_Island_5.jpg/1920px-Easter_Island_5.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "kallerna",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Easter_Island_5.jpg"
+    }
+  },
+  "Grand Canyon": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Canyon_River_Tree_%28165872763%29.jpeg/1920px-Canyon_River_Tree_%28165872763%29.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Lennart Sikkema",
+      "license": "cc by 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Canyon_River_Tree_(165872763).jpeg"
+    }
+  },
+  "Halong Bay": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Ha_Long_Bay_in_2019.jpg/1920px-Ha_Long_Bay_in_2019.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Taewangkorea",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ha_Long_Bay_in_2019.jpg"
+    }
+  },
+  "Plitvice Lakes": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/View_in_Plitvice_Lakes_National_Park.jpg/1920px-View_in_Plitvice_Lakes_National_Park.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Zysko serhii",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:View_in_Plitvice_Lakes_National_Park.jpg"
+    }
+  },
+  "Trolltunga": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Trolltunga_2017.jpg/1920px-Trolltunga_2017.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "kallerna",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Trolltunga_2017.jpg"
+    }
+  },
+  "Atomium": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Brussels_-_Atomium_2022.jpg/1920px-Brussels_-_Atomium_2022.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Marek Śliwecki",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brussels_-_Atomium_2022.jpg"
+    }
+  },
+  "Fushimi Inari Shrine": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Torii_path_with_lantern_at_Fushimi_Inari_Taisha_Shrine%2C_Kyoto%2C_Japan.jpg/1920px-Torii_path_with_lantern_at_Fushimi_Inari_Taisha_Shrine%2C_Kyoto%2C_Japan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Basile Morin",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Torii_path_with_lantern_at_Fushimi_Inari_Taisha_Shrine,_Kyoto,_Japan.jpg"
+    }
+  },
+  "Times Square": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/New_york_times_square-terabass.jpg/1920px-New_york_times_square-terabass.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Terabass",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:New_york_times_square-terabass.jpg"
+    }
+  },
+  "Mont-Saint-Michel": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Mont-Saint-Michel_vu_du_ciel.jpg/1920px-Mont-Saint-Michel_vu_du_ciel.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Amaustan",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mont-Saint-Michel_vu_du_ciel.jpg"
+    }
+  },
+  "Galapagos Islands": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Lobo_marino_%28Zalophus_californianus_wollebaeki%29%2C_Punta_Pitt%2C_isla_de_San_Crist%C3%B3bal%2C_islas_Gal%C3%A1pagos%2C_Ecuador%2C_2015-07-24%2C_DD_11.JPG/1920px-Lobo_marino_%28Zalophus_californianus_wollebaeki%29%2C_Punta_Pitt%2C_isla_de_San_Crist%C3%B3bal%2C_islas_Gal%C3%A1pagos%2C_Ecuador%2C_2015-07-24%2C_DD_11.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Diego Delso",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lobo_marino_(Zalophus_californianus_wollebaeki),_Punta_Pitt,_isla_de_San_Crist%C3%B3bal,_islas_Gal%C3%A1pagos,_Ecuador,_2015-07-24,_DD_11.JPG"
+    }
+  },
+  "Schönbrunn Palace": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Wien_-_Schloss_Sch%C3%B6nbrunn.JPG/1920px-Wien_-_Schloss_Sch%C3%B6nbrunn.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "C.Stadler/Bwag",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Wien_-_Schloss_Sch%C3%B6nbrunn.JPG"
+    }
+  },
+  "Edinburgh Castle": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/City_of_Edinburgh_-_Edinburgh_Castle_-_20140421004403.jpg/1920px-City_of_Edinburgh_-_Edinburgh_Castle_-_20140421004403.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Enric",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:City_of_Edinburgh_-_Edinburgh_Castle_-_20140421004403.jpg"
+    }
+  },
+  "Pena Palace": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Sintra_Portugal_Pal%C3%A1cio_da_Pena-01.jpg/1920px-Sintra_Portugal_Pal%C3%A1cio_da_Pena-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "CEphoto, Uwe Aranas",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sintra_Portugal_Pal%C3%A1cio_da_Pena-01.jpg"
+    }
+  },
+  "Bran Castle": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Castelul_Bran2.jpg/1920px-Castelul_Bran2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Dobre Cezar",
+      "license": "cc by-sa 3.0 ro",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Castelul_Bran2.jpg"
+    }
+  },
+  "Tikal": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Tikal_3.jpg/1920px-Tikal_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Mundo Maya",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tikal_3.jpg"
+    }
+  },
+  "Robben Island": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Robben_Island_-_Cape_Town%2C_South_Africa_%283883849594%29.jpg/1920px-Robben_Island_-_Cape_Town%2C_South_Africa_%283883849594%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "South African Tourism from South Africa",
+      "license": "cc by 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Robben_Island_-_Cape_Town,_South_Africa_(3883849594).jpg"
+    }
+  },
+  "The Louvre": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Louvre_Museum_Wikimedia_Commons.jpg/1920px-Louvre_Museum_Wikimedia_Commons.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Benh LIEU SONG (Flickr)",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Louvre_Museum_Wikimedia_Commons.jpg"
+    }
+  },
+  "St Peter's Basilica": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg/1920px-Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Alvesgaspar",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Basilica_di_San_Pietro_in_Vaticano_September_2015-1a.jpg"
+    }
+  },
+  "Cappadocia": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Cappadocia_balloon_trip%2C_Ortahisar_Castle_%2811893715185%29.jpg/1920px-Cappadocia_balloon_trip%2C_Ortahisar_Castle_%2811893715185%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Arian Zwegers from Brussels, Belgium",
+      "license": "cc by 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cappadocia_balloon_trip,_Ortahisar_Castle_(11893715185).jpg"
+    }
+  },
+  "Uluru": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/ULURU.jpg/1920px-ULURU.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Ek2030372672",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:ULURU.jpg"
+    }
+  },
+  "Lake Bled": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Lake_Bled_from_the_Mountain.jpg/1920px-Lake_Bled_from_the_Mountain.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Canadianhockey91",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Bled_from_the_Mountain.jpg"
+    }
+  },
+  "The Great Sphinx": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Sphinx_with_the_third_pyramid.jpg/1920px-Sphinx_with_the_third_pyramid.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Hesham Ebaid",
+      "license": "cc0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sphinx_with_the_third_pyramid.jpg"
+    }
+  },
+  "Komodo Island": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Komodo_Island_north_aerial.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "attribution": {
+      "artist": "jon hanson from London",
+      "license": "cc by-sa 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Komodo_Island_north_aerial.jpg"
+    }
+  },
+  "Meteora": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Meteora%27s_monastery_2.jpg/1920px-Meteora%27s_monastery_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Stathis floros",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Meteora%27s_monastery_2.jpg"
+    }
+  },
+  "Hallstatt": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Hallstatt_-_Zentrum_.JPG/1920px-Hallstatt_-_Zentrum_.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "C.Stadler/Bwag",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hallstatt_-_Zentrum_.JPG"
+    }
+  },
+  "Dead Sea": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Dead_Sea_beach_00.JPG/1920px-Dead_Sea_beach_00.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "لا روسا",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dead_Sea_beach_00.JPG"
+    }
+  },
+  "Christ the Redeemer": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Christ_the_Redeemer_-_Cristo_Redentor.jpg/1920px-Christ_the_Redeemer_-_Cristo_Redentor.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Arne Müseler",
+      "license": "cc by-sa 3.0 de",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Christ_the_Redeemer_-_Cristo_Redentor.jpg"
+    }
+  },
+  "Wat Pho Temple": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%9E%E0%B8%B8%E0%B8%97%E0%B8%98%E0%B9%84%E0%B8%AA%E0%B8%A2%E0%B8%B2%E0%B8%AA%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%8A%E0%B8%95%E0%B8%B8%E0%B8%9E%E0%B8%99.jpg/1920px-%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%9E%E0%B8%B8%E0%B8%97%E0%B8%98%E0%B9%84%E0%B8%AA%E0%B8%A2%E0%B8%B2%E0%B8%AA%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%8A%E0%B8%95%E0%B8%B8%E0%B8%9E%E0%B8%99.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Mastertongapollo",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%9E%E0%B8%B8%E0%B8%97%E0%B8%98%E0%B9%84%E0%B8%AA%E0%B8%A2%E0%B8%B2%E0%B8%AA%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%8A%E0%B8%95%E0%B8%B8%E0%B8%9E%E0%B8%99.jpg"
+    }
+  },
+  "Pyramid of the Sun, Teotihuacan": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/2020-02-11_Teotihuacan_la_Avenida_de_los_Muertos_y_la_Pir%C3%A1mide_del_Sol.jpg/1920px-2020-02-11_Teotihuacan_la_Avenida_de_los_Muertos_y_la_Pir%C3%A1mide_del_Sol.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Burkhard Mücke",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2020-02-11_Teotihuacan_la_Avenida_de_los_Muertos_y_la_Pir%C3%A1mide_del_Sol.jpg"
+    }
+  },
+  "Bagan Temples": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/89/Bagan%2C_Burma.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "attribution": {
+      "artist": "Corto Maltese 1999",
+      "license": "cc by 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bagan,_Burma.jpg"
+    }
+  },
+  "Patagonia, Torres del Paine": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Torres_del_Paine_y_cuernos_del_Paine%2C_montaje.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "attribution": {
+      "artist": "Karen Chan 16 y Miguel.v ( local | logs | global ) (originales), y Jorge Morales Piderit (montaje).",
+      "license": "cc by 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Torres_del_Paine_y_cuernos_del_Paine,_montaje.jpg"
+    }
+  },
+  "Pamukkale Travertines": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Pamukkale_30.jpg/1920px-Pamukkale_30.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Antoine Taveneaux",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pamukkale_30.jpg"
+    }
+  },
+  "Cape Reinga Lighthouse": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Cape_Reinga%2C_Northland%2C_New_Zealand%2C_October_2007.jpg/1920px-Cape_Reinga%2C_Northland%2C_New_Zealand%2C_October_2007.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Phillip Capper from Wellington, New Zealand",
+      "license": "cc by 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cape_Reinga,_Northland,_New_Zealand,_October_2007.jpg"
+    }
+  },
+  "CN Tower": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/CNTowerNastyFall.jpg/1920px-CNTowerNastyFall.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Franklin Vera Pacheco",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:CNTowerNastyFall.jpg"
+    }
+  },
+  "Blue Lagoon": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/BlueLagoon_Noface.jpg/1920px-BlueLagoon_Noface.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Prosthetic Head",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:BlueLagoon_Noface.jpg"
+    }
+  },
+  "Salar de Uyuni": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Salar_Uyuni_au01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "attribution": {
+      "artist": "Anouchka Unel",
+      "license": "fal",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Salar_Uyuni_au01.jpg"
+    }
+  },
+  "Marrakech Medina": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Pavillon_Menarag%C3%A4rten.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "attribution": {
+      "artist": "Acp",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pavillon_Menarag%C3%A4rten.jpg"
+    }
+  },
+  "Charles Bridge": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Prague_07-2016_view_from_Lesser_Town_Tower_of_Charles_Bridge_img3.jpg/1920px-Prague_07-2016_view_from_Lesser_Town_Tower_of_Charles_Bridge_img3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "A.Savin",
+      "license": "fal",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Prague_07-2016_view_from_Lesser_Town_Tower_of_Charles_Bridge_img3.jpg"
+    }
+  },
+  "Petronas Towers": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/2016_Kuala_Lumpur%2C_Park_KLCC_i_Suria_KLCC_%28cropped%29.jpg/1920px-2016_Kuala_Lumpur%2C_Park_KLCC_i_Suria_KLCC_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Marcin Konsek",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2016_Kuala_Lumpur,_Park_KLCC_i_Suria_KLCC_(cropped).jpg"
+    }
+  },
+  "Reichstag Building": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Berlin_reichstag_west_panorama_2.jpg/1920px-Berlin_reichstag_west_panorama_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "Mfield, Matthew Field, http://www.photography.mattfield.com; edit by Waugsberg (rotation 0,4°)",
+      "license": "gfdl 1.2",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Berlin_reichstag_west_panorama_2.jpg"
+    }
+  },
+  "Auckland Sky Tower": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/2023_New_Year%27s_Eve_Firework_Display_Auckland.jpg/1920px-2023_New_Year%27s_Eve_Firework_Display_Auckland.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "attribution": {
+      "artist": "James Shih",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2023_New_Year%27s_Eve_Firework_Display_Auckland.jpg"
+    }
+  },
+  "Bali Rice Terraces": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Bali_%E2%80%93_Rice_terrace_%282687339411%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "attribution": {
+      "artist": "William Cho",
+      "license": "cc by-sa 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bali_%E2%80%93_Rice_terrace_(2687339411).jpg"
+    }
+  }
+}
