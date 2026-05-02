@@ -36,10 +36,36 @@ export interface WikiImage {
   sourceUrl: string;    // Commons file description page
 }
 
-async function getJSON(url: string): Promise<any> {
+// MediaWiki API response shapes (only the fields we read).
+interface MWQueryResponse<P> {
+  query?: { pages?: P[] };
+}
+interface MWPageImage {
+  missing?: boolean;
+  pageimage?: string;
+}
+interface MWPageImages {
+  images?: { title: string }[];
+}
+interface MWImageInfo {
+  imageinfo?: Array<{
+    url?: string;
+    thumburl?: string;
+    width?: number;
+    height?: number;
+    mime?: string;
+    descriptionurl?: string;
+    extmetadata?: {
+      LicenseShortName?: { value?: string };
+      Artist?: { value?: string };
+    };
+  }>;
+}
+
+async function getJSON<T>(url: string): Promise<T> {
   const res = await fetch(url, { headers: { 'User-Agent': UA, 'Api-User-Agent': UA } });
   if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
-  return res.json();
+  return res.json() as Promise<T>;
 }
 
 async function getLeadImageFile(title: string): Promise<string | null> {
@@ -53,8 +79,8 @@ async function getLeadImageFile(title: string): Promise<string | null> {
     redirects: '1',
     origin: '*',
   });
-  const json = await getJSON(`${WIKI_API}?${params}`);
-  const page = json?.query?.pages?.[0];
+  const json = await getJSON<MWQueryResponse<MWPageImage>>(`${WIKI_API}?${params}`);
+  const page = json.query?.pages?.[0];
   if (!page || page.missing) return null;
   if (!page.pageimage) return null;
   return `File:${page.pageimage}`;
@@ -73,10 +99,10 @@ async function listArticleImages(title: string): Promise<string[]> {
     redirects: '1',
     origin: '*',
   });
-  const json = await getJSON(`${WIKI_API}?${params}`);
-  const page = json?.query?.pages?.[0];
+  const json = await getJSON<MWQueryResponse<MWPageImages>>(`${WIKI_API}?${params}`);
+  const page = json.query?.pages?.[0];
   if (!page || !Array.isArray(page.images)) return [];
-  return page.images.map((i: { title: string }) => i.title);
+  return page.images.map(i => i.title);
 }
 
 function stripHtml(s: string): string {
@@ -94,20 +120,20 @@ async function getImageInfo(fileTitle: string): Promise<WikiImage | null> {
     iiurlwidth: '1600',
     origin: '*',
   });
-  const json = await getJSON(`${COMMONS_API}?${params}`);
-  const ii = json?.query?.pages?.[0]?.imageinfo?.[0];
+  const json = await getJSON<MWQueryResponse<MWImageInfo>>(`${COMMONS_API}?${params}`);
+  const ii = json.query?.pages?.[0]?.imageinfo?.[0];
   if (!ii) return null;
   const meta = ii.extmetadata || {};
   const license = (meta.LicenseShortName?.value || '').toString().toLowerCase().trim();
   const artist = stripHtml(meta.Artist?.value || '') || 'Unknown';
   return {
-    url: ii.thumburl || ii.url,
-    width: ii.width,
-    height: ii.height,
-    mime: ii.mime,
+    url: ii.thumburl || ii.url || '',
+    width: ii.width || 0,
+    height: ii.height || 0,
+    mime: ii.mime || '',
     artist,
     license,
-    sourceUrl: ii.descriptionurl,
+    sourceUrl: ii.descriptionurl || '',
   };
 }
 
