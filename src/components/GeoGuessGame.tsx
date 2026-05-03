@@ -1,9 +1,20 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
 import { Globe, Users, Building2, Languages, Flag, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
 import type { DailyPuzzle, PuzzleLocation } from '@/types';
-import { MAP_VIEWBOX, geoToPixel, regionForCoord, roundConfigs } from '@/lib/projection';
+import { regionForCoord } from '@/lib/projection';
 import { haversineKm, scoreFromDistance } from '@/lib/distance';
-import { CountryBorders } from './CountryBorders';
+
+// Leaflet touches window/document on import, so the map widget is loaded
+// client-side only. Pages Router has no 'use client' directive.
+const MapPicker = dynamic(() => import('./MapPicker'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center text-xs text-gray-500 bg-blue-50">
+      Loading map…
+    </div>
+  ),
+});
 
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 5;
@@ -35,10 +46,9 @@ const GeoGuessGame: React.FC = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [revealLocation, setRevealLocation] = useState(false);
-  const [hoveredRegion, setHoveredRegion] = useState<number | null>(null);
   const [guessedRegion, setGuessedRegion] = useState<number | null>(null);
   const [isCorrectGuess, setIsCorrectGuess] = useState<boolean | null>(null);
-  const [clickedPixel, setClickedPixel] = useState<{ x: number; y: number } | null>(null);
+  const [clickedLatLng, setClickedLatLng] = useState<{ lat: number; lng: number } | null>(null);
   const [distanceKm, setDistanceKm] = useState<number | null>(null);
   const [powerups, setPowerups] = useState<PowerupState>(initialPowerups);
 
@@ -219,58 +229,25 @@ const GeoGuessGame: React.FC = () => {
 
   const currentLocation: PuzzleLocation | undefined = puzzle?.locations[round - 1];
 
-  // Lines splitting the map into the round's grid.
-  const divisionLines = useMemo(() => {
-    const cfg = roundConfigs[round];
-    if (!cfg) return null;
-    const { width, height } = MAP_VIEWBOX;
-    const lines: React.ReactElement[] = [];
-    for (let i = 1; i < cfg.cols; i++) {
-      const x = (i * width) / cfg.cols;
-      lines.push(
-        <line key={`v${i}`} x1={x} y1={0} x2={x} y2={height} stroke="#000000" strokeWidth={1.2} strokeDasharray="3 3" />,
-      );
-    }
-    for (let i = 1; i < cfg.rows; i++) {
-      const y = (i * height) / cfg.rows;
-      lines.push(
-        <line key={`h${i}`} x1={0} y1={y} x2={width} y2={y} stroke="#000000" strokeWidth={1.2} strokeDasharray="3 3" />,
-      );
-    }
-    return lines;
-  }, [round]);
-
-  const correctRegion = useMemo(() => {
-    if (!currentLocation) return -1;
-    return regionForCoord(round, currentLocation.lat, currentLocation.lng);
-  }, [round, currentLocation]);
-
-  const handleGuess = (regionIdx: number, e: React.MouseEvent<SVGRectElement>) => {
+  const handleMapGuess = (lat: number, lng: number) => {
     if (!currentLocation || guessedRegion !== null) return;
 
-    const correct = regionIdx === correctRegion;
+    const regionIdx = regionForCoord(round, lat, lng);
+    const correctIdx = regionForCoord(round, currentLocation.lat, currentLocation.lng);
+    const correct = regionIdx === correctIdx;
+
     setGuessedRegion(regionIdx);
     setIsCorrectGuess(correct);
+    setClickedLatLng({ lat, lng });
 
-    // Always capture click + reveal actual location, even on wrong guesses,
-    // so the player learns where it was. Wrong guesses score 0; correct
-    // guesses scale 0..100 by distance from the click to the real coords.
-    const svg = e.currentTarget.ownerSVGElement!;
-    const rect = svg.getBoundingClientRect();
-    const vbX = ((e.clientX - rect.left) / rect.width) * MAP_VIEWBOX.width;
-    const vbY = ((e.clientY - rect.top) / rect.height) * MAP_VIEWBOX.height;
-    setClickedPixel({ x: vbX, y: vbY });
-
-    const clickedLng = (vbX / MAP_VIEWBOX.width) * 360 - 180;
-    const clickedLat = 90 - (vbY / MAP_VIEWBOX.height) * 180;
-    const km = haversineKm(clickedLat, clickedLng, currentLocation.lat, currentLocation.lng);
+    const km = haversineKm(lat, lng, currentLocation.lat, currentLocation.lng);
     setDistanceKm(Math.round(km));
     setRevealLocation(true);
 
-    // Score is distance-based for every guess. Region selection only affects
-    // the correct/wrong feedback message, not the score.
+    // Score is distance-based for every guess. Region selection only drives
+    // the correct/wrong feedback message; the score scales with how close
+    // the click was to the actual landmark.
     const roundScore = scoreFromDistance(km);
-
     setRoundResults(rr => [...rr, { correct, score: roundScore, km: Math.round(km) }]);
 
     setTimeout(() => {
@@ -279,7 +256,7 @@ const GeoGuessGame: React.FC = () => {
         setHasWon(true);
         setGameOver(true);
       } else {
-        setClickedPixel(null);
+        setClickedLatLng(null);
         setDistanceKm(null);
         setRevealLocation(false);
         setGuessedRegion(null);
@@ -287,54 +264,6 @@ const GeoGuessGame: React.FC = () => {
         setRound(r => r + 1);
       }
     }, 2200);
-  };
-
-  const renderRegions = () => {
-    const cfg = roundConfigs[round];
-    if (!cfg) return null;
-    const { width, height } = MAP_VIEWBOX;
-    const cellW = width / cfg.cols;
-    const cellH = height / cfg.rows;
-    const cells: React.ReactElement[] = [];
-    for (let row = 0; row < cfg.rows; row++) {
-      for (let col = 0; col < cfg.cols; col++) {
-        const idx = row * cfg.cols + col;
-        let fill = 'transparent';
-        if (idx === guessedRegion) {
-          fill = isCorrectGuess ? 'rgba(34, 197, 94, 0.25)' : 'rgba(239, 68, 68, 0.25)';
-        } else if (idx === hoveredRegion && guessedRegion === null) {
-          fill = 'rgba(59, 130, 246, 0.2)';
-        }
-        cells.push(
-          <g key={idx}>
-            <rect
-              x={col * cellW}
-              y={row * cellH}
-              width={cellW}
-              height={cellH}
-              fill={fill}
-              className="cursor-pointer transition-colors duration-200"
-              onMouseEnter={() => setHoveredRegion(idx)}
-              onMouseLeave={() => setHoveredRegion(null)}
-              onClick={e => handleGuess(idx, e)}
-            />
-            {idx === guessedRegion && (
-              <g transform={`translate(${col * cellW + cellW / 2}, ${row * cellH + cellH / 2})`}>
-                {isCorrectGuess ? (
-                  <path d="M-30 0 L-10 20 L30 -20" stroke="rgb(34,197,94)" strokeWidth={8} fill="none" strokeLinecap="round" />
-                ) : (
-                  <g stroke="rgb(239,68,68)" strokeWidth={8}>
-                    <line x1={-20} y1={-20} x2={20} y2={20} strokeLinecap="round" />
-                    <line x1={-20} y1={20} x2={20} y2={-20} strokeLinecap="round" />
-                  </g>
-                )}
-              </g>
-            )}
-          </g>,
-        );
-      }
-    }
-    return cells;
   };
 
   const resetGame = () => {
@@ -346,8 +275,7 @@ const GeoGuessGame: React.FC = () => {
     setRevealLocation(false);
     setGuessedRegion(null);
     setIsCorrectGuess(null);
-    setHoveredRegion(null);
-    setClickedPixel(null);
+    setClickedLatLng(null);
     setDistanceKm(null);
     setPowerups(initialPowerups);
     setRoundResults([]);
@@ -480,58 +408,26 @@ const GeoGuessGame: React.FC = () => {
                 )}
               </div>
 
-              {/* Right column reserves space; map sits vertically centered.
-                  transform-origin: right (mid-right edge) so hover-scale grows
-                  up + down + left, overlaying the image without pushing layout. */}
+              {/* Right column reserves space; the Leaflet map sits vertically centered
+                  and hover-scales 2.4x, overlaying the image without pushing layout.
+                  We use CSS transform on the wrapper for the hover-scale; Leaflet's
+                  click coordinates use getBoundingClientRect which is transform-aware,
+                  so clicks at any scale resolve to the correct lat/lng. */}
               <div className="flex-1 relative">
-                <div className="absolute top-1/2 right-0 -translate-y-1/2 z-10 w-full origin-right transition-transform duration-300 ease-out hover:scale-[2.4] hover:z-50 cursor-crosshair">
-                  <div
-                    className="relative rounded-lg overflow-hidden border-2 border-white shadow-xl"
-                    style={{ backgroundColor: '#cfe7fa', aspectRatio: '2 / 1' }}
-                  >
-                    {/* The map is now pure SVG: ocean-colored background div + filled
-                        country paths + region grid + pins. No bitmap, so no graticule
-                        or equator line baked in. */}
-                    <svg
-                      viewBox={`0 0 ${MAP_VIEWBOX.width} ${MAP_VIEWBOX.height}`}
-                      preserveAspectRatio="none"
-                      className="absolute top-0 left-0 w-full h-full"
-                    >
-                      <CountryBorders fill="rgb(243,244,246)" stroke="rgb(75,85,99)" strokeWidth={0.4} />
-                      {!gameOver && (
-                        <>
-                          {divisionLines}
-                          {renderRegions()}
-                        </>
-                      )}
-                      {revealLocation && currentLocation && (() => {
-                        const p = geoToPixel(currentLocation.lat, currentLocation.lng);
-                        const name = currentLocation.name;
-                        // Pill-shaped white background behind the label keeps it readable
-                        // against the map's terrain colors.
-                        const padX = 4;
-                        const charW = 6;
-                        const labelW = name.length * charW + padX * 2;
-                        const labelH = 14;
-                        return (
-                          <g transform={`translate(${p.x}, ${p.y})`}>
-                            <circle r={5} fill="rgb(220,38,38)" stroke="white" strokeWidth={1.5} />
-                            <g transform={`translate(${10}, ${-labelH / 2})`}>
-                              <rect width={labelW} height={labelH} rx={3} fill="white" stroke="rgb(220,38,38)" strokeWidth={0.8} />
-                              <text x={padX} y={labelH - 4} fontSize={10} fill="rgb(185,28,28)" fontWeight="700">
-                                {name}
-                              </text>
-                            </g>
-                          </g>
-                        );
-                      })()}
-                      {clickedPixel && (
-                        <circle cx={clickedPixel.x} cy={clickedPixel.y} r={3} fill="black" stroke="white" strokeWidth={1} />
-                      )}
-                    </svg>
+                <div className="absolute top-1/2 right-0 -translate-y-1/2 z-10 w-full origin-right transition-transform duration-300 ease-out hover:scale-[2.4] hover:z-50">
+                  <div className="relative rounded-lg overflow-hidden border-2 border-white shadow-xl aspect-[2/1] bg-blue-50">
+                    <MapPicker
+                      round={round}
+                      target={currentLocation ? { lat: currentLocation.lat, lng: currentLocation.lng, name: currentLocation.name } : undefined}
+                      click={clickedLatLng}
+                      isCorrect={isCorrectGuess}
+                      reveal={revealLocation}
+                      disabled={gameOver || guessedRegion !== null}
+                      onGuess={handleMapGuess}
+                    />
                   </div>
                   <p className="text-[10px] text-center mt-1 text-gray-700">
-                    Hover to enlarge · click to guess
+                    Hover to enlarge · scroll to zoom · click to guess
                   </p>
                 </div>
               </div>
