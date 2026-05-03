@@ -3,8 +3,6 @@ import { Globe, Users, Building2, Languages, Flag, ZoomIn, ZoomOut, RotateCcw } 
 import type { DailyPuzzle, PuzzleLocation } from '@/types';
 import { MAP_VIEWBOX, geoToPixel, regionForCoord, roundConfigs } from '@/lib/projection';
 import { haversineKm, scoreFromDistance } from '@/lib/distance';
-import { CountryBorders } from './CountryBorders';
-
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 5;
 const clamp = (n: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, n));
@@ -83,18 +81,108 @@ const GeoGuessGame: React.FC = () => {
     if (zoom <= 1) setPan({ x: 0, y: 0 });
   }, [zoom]);
 
-  // Wheel-zoom on the image. React's onWheel is passive, so preventDefault
-  // can't be called inside it. Attach a non-passive listener via ref instead.
+  // Refs mirror the latest zoom/pan so the wheel + touch handlers (registered
+  // once with passive:false) can read them without being re-attached on every
+  // state change.
+  const zoomRef = useRef(zoom);
+  const panRef = useRef(pan);
+  useEffect(() => { zoomRef.current = zoom; }, [zoom]);
+  useEffect(() => { panRef.current = pan; }, [pan]);
+
+  // Cursor-anchored wheel zoom + 2-finger pinch zoom + 1-finger drag pan.
+  // For both zoom paths we keep the point under the cursor / pinch midpoint
+  // stationary by adjusting pan with: newPan = anchor + (oldPan - anchor) * ratio
+  // where `anchor` is the cursor/midpoint offset from the container's center.
   useEffect(() => {
     const el = imageBoxRef.current;
     if (!el) return;
+
+    const anchorOf = (clientX: number, clientY: number) => {
+      const r = el.getBoundingClientRect();
+      return { x: clientX - r.left - r.width / 2, y: clientY - r.top - r.height / 2 };
+    };
+
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
+      const oldZoom = zoomRef.current;
       const factor = e.deltaY > 0 ? 0.9 : 1.1;
-      setZoom(z => clamp(z * factor, MIN_ZOOM, MAX_ZOOM));
+      const newZoom = clamp(oldZoom * factor, MIN_ZOOM, MAX_ZOOM);
+      if (newZoom === oldZoom) return;
+      const { x: ax, y: ay } = anchorOf(e.clientX, e.clientY);
+      const ratio = newZoom / oldZoom;
+      setZoom(newZoom);
+      setPan({
+        x: ax + (panRef.current.x - ax) * ratio,
+        y: ay + (panRef.current.y - ay) * ratio,
+      });
     };
+
+    type Pinch = { baseZoom: number; basePan: { x: number; y: number }; startDist: number; ax: number; ay: number };
+    type TouchPan = { sx: number; sy: number; basePan: { x: number; y: number } };
+    let pinch: Pinch | null = null;
+    let touchPan: TouchPan | null = null;
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        const t1 = e.touches[0], t2 = e.touches[1];
+        const a = anchorOf((t1.clientX + t2.clientX) / 2, (t1.clientY + t2.clientY) / 2);
+        pinch = {
+          baseZoom: zoomRef.current,
+          basePan: { ...panRef.current },
+          startDist: Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY),
+          ax: a.x,
+          ay: a.y,
+        };
+        touchPan = null;
+      } else if (e.touches.length === 1 && zoomRef.current > 1) {
+        e.preventDefault();
+        touchPan = {
+          sx: e.touches[0].clientX,
+          sy: e.touches[0].clientY,
+          basePan: { ...panRef.current },
+        };
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length === 2 && pinch) {
+        e.preventDefault();
+        const t1 = e.touches[0], t2 = e.touches[1];
+        const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+        const newZoom = clamp(pinch.baseZoom * (dist / pinch.startDist), MIN_ZOOM, MAX_ZOOM);
+        const ratio = newZoom / pinch.baseZoom;
+        setZoom(newZoom);
+        setPan({
+          x: pinch.ax + (pinch.basePan.x - pinch.ax) * ratio,
+          y: pinch.ay + (pinch.basePan.y - pinch.ay) * ratio,
+        });
+      } else if (e.touches.length === 1 && touchPan) {
+        e.preventDefault();
+        setPan({
+          x: touchPan.basePan.x + (e.touches[0].clientX - touchPan.sx),
+          y: touchPan.basePan.y + (e.touches[0].clientY - touchPan.sy),
+        });
+      }
+    };
+
+    const onTouchEnd = () => {
+      pinch = null;
+      touchPan = null;
+    };
+
     el.addEventListener('wheel', onWheel, { passive: false });
-    return () => el.removeEventListener('wheel', onWheel);
+    el.addEventListener('touchstart', onTouchStart, { passive: false });
+    el.addEventListener('touchmove', onTouchMove, { passive: false });
+    el.addEventListener('touchend', onTouchEnd);
+    el.addEventListener('touchcancel', onTouchEnd);
+    return () => {
+      el.removeEventListener('wheel', onWheel);
+      el.removeEventListener('touchstart', onTouchStart);
+      el.removeEventListener('touchmove', onTouchMove);
+      el.removeEventListener('touchend', onTouchEnd);
+      el.removeEventListener('touchcancel', onTouchEnd);
+    };
   }, []);
 
   const beginPan = (e: React.MouseEvent) => {
@@ -264,7 +352,7 @@ const GeoGuessGame: React.FC = () => {
               className="text-6xl font-bold mb-4 text-center"
               style={{ fontFamily: 'Fredoka One, cursive', textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}
             >
-              GeoGuesser
+              GeoGuess
             </h1>
             <p className="text-xl text-gray-700 mb-8 text-center">Guess the location of world landmarks</p>
             {puzzleError && <p className="text-red-600 mb-4 text-sm">Error loading puzzle: {puzzleError}</p>}
@@ -284,7 +372,7 @@ const GeoGuessGame: React.FC = () => {
               className="text-6xl font-bold mb-6"
               style={{ fontFamily: 'Fredoka One, cursive', textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}
             >
-              GeoGuesser
+              GeoGuess
             </h1>
             <p className="text-xl text-gray-600 mb-10">{todayLabel()}</p>
             <div className="flex justify-center gap-12">
@@ -393,9 +481,6 @@ const GeoGuessGame: React.FC = () => {
                       preserveAspectRatio="none"
                       className="absolute top-0 left-0 w-full h-full"
                     >
-                      {/* Country border overlay — projected with the same equirectangular
-                          formula as pins, so they align. Drawn first so other layers render on top. */}
-                      <CountryBorders />
                       {!gameOver && (
                         <>
                           {divisionLines}
