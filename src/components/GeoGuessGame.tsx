@@ -3,6 +3,8 @@ import { Globe, Users, Building2, Languages, Flag, ZoomIn, ZoomOut, RotateCcw } 
 import type { DailyPuzzle, PuzzleLocation } from '@/types';
 import { MAP_VIEWBOX, geoToPixel, regionForCoord, roundConfigs } from '@/lib/projection';
 import { haversineKm, scoreFromDistance } from '@/lib/distance';
+import { CountryBorders } from './CountryBorders';
+
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 5;
 const clamp = (n: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, n));
@@ -39,6 +41,10 @@ const GeoGuessGame: React.FC = () => {
   const [clickedPixel, setClickedPixel] = useState<{ x: number; y: number } | null>(null);
   const [distanceKm, setDistanceKm] = useState<number | null>(null);
   const [powerups, setPowerups] = useState<PowerupState>(initialPowerups);
+
+  // Per-round outcomes — drives the game-over stats panel.
+  type RoundResult = { correct: boolean; score: number; km: number };
+  const [roundResults, setRoundResults] = useState<RoundResult[]>([]);
 
   // Image zoom + pan. Resets on every round change.
   const [zoom, setZoom] = useState(1);
@@ -183,7 +189,11 @@ const GeoGuessGame: React.FC = () => {
       el.removeEventListener('touchend', onTouchEnd);
       el.removeEventListener('touchcancel', onTouchEnd);
     };
-  }, []);
+    // Re-run whenever the image box mounts (i.e. whenever the player enters
+    // a game). Without `gameStarted` in deps the effect runs once at app
+    // mount when imageBoxRef.current is still null, and the listener never
+    // gets attached.
+  }, [gameStarted]);
 
   const beginPan = (e: React.MouseEvent) => {
     if (zoom <= 1) return;
@@ -218,13 +228,13 @@ const GeoGuessGame: React.FC = () => {
     for (let i = 1; i < cfg.cols; i++) {
       const x = (i * width) / cfg.cols;
       lines.push(
-        <line key={`v${i}`} x1={x} y1={0} x2={x} y2={height} stroke="#2563eb" strokeWidth={2} strokeDasharray="4" />,
+        <line key={`v${i}`} x1={x} y1={0} x2={x} y2={height} stroke="#000000" strokeWidth={1.2} strokeDasharray="3 3" />,
       );
     }
     for (let i = 1; i < cfg.rows; i++) {
       const y = (i * height) / cfg.rows;
       lines.push(
-        <line key={`h${i}`} x1={0} y1={y} x2={width} y2={y} stroke="#2563eb" strokeWidth={2} strokeDasharray="4" />,
+        <line key={`h${i}`} x1={0} y1={y} x2={width} y2={y} stroke="#000000" strokeWidth={1.2} strokeDasharray="3 3" />,
       );
     }
     return lines;
@@ -260,6 +270,8 @@ const GeoGuessGame: React.FC = () => {
     // Score is distance-based for every guess. Region selection only affects
     // the correct/wrong feedback message, not the score.
     const roundScore = scoreFromDistance(km);
+
+    setRoundResults(rr => [...rr, { correct, score: roundScore, km: Math.round(km) }]);
 
     setTimeout(() => {
       setScore(s => s + roundScore);
@@ -338,6 +350,9 @@ const GeoGuessGame: React.FC = () => {
     setClickedPixel(null);
     setDistanceKm(null);
     setPowerups(initialPowerups);
+    setRoundResults([]);
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
   };
 
   return (
@@ -470,17 +485,19 @@ const GeoGuessGame: React.FC = () => {
                   up + down + left, overlaying the image without pushing layout. */}
               <div className="flex-1 relative">
                 <div className="absolute top-1/2 right-0 -translate-y-1/2 z-10 w-full origin-right transition-transform duration-300 ease-out hover:scale-[2.4] hover:z-50 cursor-crosshair">
-                  <div className="relative rounded-lg overflow-hidden border-2 border-white bg-white shadow-xl">
-                    <img
-                      src="/images/world-map.jpeg?v=2"
-                      alt="World Map"
-                      className="w-full h-auto block select-none pointer-events-none"
-                    />
+                  <div
+                    className="relative rounded-lg overflow-hidden border-2 border-white shadow-xl"
+                    style={{ backgroundColor: '#cfe7fa', aspectRatio: '2 / 1' }}
+                  >
+                    {/* The map is now pure SVG: ocean-colored background div + filled
+                        country paths + region grid + pins. No bitmap, so no graticule
+                        or equator line baked in. */}
                     <svg
                       viewBox={`0 0 ${MAP_VIEWBOX.width} ${MAP_VIEWBOX.height}`}
                       preserveAspectRatio="none"
                       className="absolute top-0 left-0 w-full h-full"
                     >
+                      <CountryBorders fill="rgb(243,244,246)" stroke="rgb(75,85,99)" strokeWidth={0.4} />
                       {!gameOver && (
                         <>
                           {divisionLines}
@@ -663,9 +680,28 @@ const GeoGuessGame: React.FC = () => {
             >
               {hasWon ? 'Congratulations!' : 'Game Over'}
             </h2>
-            <div className="text-xl text-gray-700 mb-8 text-center">
-              <p className="mb-2">Rounds Completed: {round}/{TOTAL_ROUNDS}</p>
-              <p>Final Score: {score}</p>
+            <div className="text-gray-700 mb-8 text-center w-full">
+              <div className="grid grid-cols-2 gap-x-8 gap-y-3 text-base">
+                <div className="text-right text-gray-600">Final score</div>
+                <div className="text-left font-bold text-green-600">{score} / {TOTAL_ROUNDS * 100}</div>
+
+                <div className="text-right text-gray-600">Rounds correct</div>
+                <div className="text-left font-bold">
+                  {roundResults.filter(r => r.correct).length} / {TOTAL_ROUNDS}
+                </div>
+
+                <div className="text-right text-gray-600">Best round</div>
+                <div className="text-left font-bold">
+                  {roundResults.length > 0 ? Math.max(...roundResults.map(r => r.score)) : 0} pts
+                </div>
+
+                <div className="text-right text-gray-600">Avg distance</div>
+                <div className="text-left font-bold">
+                  {roundResults.length > 0
+                    ? Math.round(roundResults.reduce((s, r) => s + r.km, 0) / roundResults.length).toLocaleString()
+                    : 0} km
+                </div>
+              </div>
             </div>
             <button
               className="bg-black text-white px-12 py-3 rounded-full text-xl font-semibold hover:bg-gray-800 transition-colors z-50"
