@@ -1,8 +1,13 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { Globe, Users, Building2, Languages, Flag } from 'lucide-react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Globe, Users, Building2, Languages, Flag, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
 import type { DailyPuzzle, PuzzleLocation } from '@/types';
 import { MAP_VIEWBOX, geoToPixel, regionForCoord, roundConfigs } from '@/lib/projection';
 import { haversineKm, scoreFromDistance } from '@/lib/distance';
+import { CountryBorders } from './CountryBorders';
+
+const MIN_ZOOM = 1;
+const MAX_ZOOM = 5;
+const clamp = (n: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, n));
 
 const TOTAL_ROUNDS = 8;
 
@@ -37,6 +42,13 @@ const GeoGuessGame: React.FC = () => {
   const [distanceKm, setDistanceKm] = useState<number | null>(null);
   const [powerups, setPowerups] = useState<PowerupState>(initialPowerups);
 
+  // Image zoom + pan. Resets on every round change.
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [isPanning, setIsPanning] = useState(false);
+  const panStart = useRef<{ mx: number; my: number; px: number; py: number } | null>(null);
+  const imageBoxRef = useRef<HTMLDivElement>(null);
+
   // Load today's puzzle from the API.
   useEffect(() => {
     let cancelled = false;
@@ -53,7 +65,7 @@ const GeoGuessGame: React.FC = () => {
     };
   }, []);
 
-  // Reset active (not used) powerups whenever the round changes.
+  // Reset active (not used) powerups + zoom/pan whenever the round changes.
   useEffect(() => {
     setPowerups(prev => ({
       countryName: { active: false, used: prev.countryName.used },
@@ -62,7 +74,50 @@ const GeoGuessGame: React.FC = () => {
       language: { active: false, used: prev.language.used },
       flag: { active: false, used: prev.flag.used },
     }));
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
   }, [round]);
+
+  // Auto-clear pan whenever zoom drops back to 1.
+  useEffect(() => {
+    if (zoom <= 1) setPan({ x: 0, y: 0 });
+  }, [zoom]);
+
+  // Wheel-zoom on the image. React's onWheel is passive, so preventDefault
+  // can't be called inside it. Attach a non-passive listener via ref instead.
+  useEffect(() => {
+    const el = imageBoxRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      const factor = e.deltaY > 0 ? 0.9 : 1.1;
+      setZoom(z => clamp(z * factor, MIN_ZOOM, MAX_ZOOM));
+    };
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, []);
+
+  const beginPan = (e: React.MouseEvent) => {
+    if (zoom <= 1) return;
+    e.preventDefault();
+    setIsPanning(true);
+    panStart.current = { mx: e.clientX, my: e.clientY, px: pan.x, py: pan.y };
+  };
+  const movePan = (e: React.MouseEvent) => {
+    if (!isPanning || !panStart.current) return;
+    setPan({
+      x: panStart.current.px + (e.clientX - panStart.current.mx),
+      y: panStart.current.py + (e.clientY - panStart.current.my),
+    });
+  };
+  const endPan = () => {
+    setIsPanning(false);
+    panStart.current = null;
+  };
+  const resetView = () => {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+  };
 
   const currentLocation: PuzzleLocation | undefined = puzzle?.locations[round - 1];
 
@@ -247,13 +302,28 @@ const GeoGuessGame: React.FC = () => {
           <div className="container mx-auto px-4">
             {/* Image + map row — both float directly on the page background. */}
             <div className="flex gap-4 items-stretch">
-              {/* Image */}
-              <div className="w-[65%] aspect-video bg-gray-200 rounded-lg overflow-hidden relative shadow-lg">
+              {/* Zoomable image. Scroll to zoom (cursor over image), drag to pan when zoomed. */}
+              <div
+                ref={imageBoxRef}
+                onMouseDown={beginPan}
+                onMouseMove={movePan}
+                onMouseUp={endPan}
+                onMouseLeave={endPan}
+                className={`w-[65%] aspect-video bg-gray-200 rounded-lg overflow-hidden relative shadow-lg ${
+                  zoom > 1 ? (isPanning ? 'cursor-grabbing' : 'cursor-grab') : 'cursor-default'
+                }`}
+              >
                 {currentLocation?.image ? (
                   <img
                     src={currentLocation.image}
                     alt={`Location ${round}`}
-                    className="w-full h-full object-cover"
+                    draggable={false}
+                    className="w-full h-full object-cover select-none"
+                    style={{
+                      transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+                      transformOrigin: 'center center',
+                      transition: isPanning ? 'none' : 'transform 0.12s ease-out',
+                    }}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-gray-500">
@@ -262,6 +332,38 @@ const GeoGuessGame: React.FC = () => {
                       : 'Loading location…'}
                   </div>
                 )}
+
+                {/* Zoom controls — overlay top-right of image. Stays fixed regardless of pan/zoom. */}
+                <div className="absolute top-2 right-2 flex flex-col gap-1 bg-black/55 rounded-md p-1 backdrop-blur-sm">
+                  <button
+                    type="button"
+                    onClick={() => setZoom(z => clamp(z * 1.4, MIN_ZOOM, MAX_ZOOM))}
+                    className="w-7 h-7 flex items-center justify-center rounded text-white hover:bg-white/20 disabled:opacity-40"
+                    disabled={zoom >= MAX_ZOOM}
+                    title="Zoom in (or scroll up)"
+                  >
+                    <ZoomIn className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setZoom(z => clamp(z / 1.4, MIN_ZOOM, MAX_ZOOM))}
+                    className="w-7 h-7 flex items-center justify-center rounded text-white hover:bg-white/20 disabled:opacity-40"
+                    disabled={zoom <= MIN_ZOOM}
+                    title="Zoom out (or scroll down)"
+                  >
+                    <ZoomOut className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={resetView}
+                    className="w-7 h-7 flex items-center justify-center rounded text-white hover:bg-white/20 disabled:opacity-40"
+                    disabled={zoom === 1 && pan.x === 0 && pan.y === 0}
+                    title="Reset view"
+                  >
+                    <RotateCcw className="w-4 h-4" />
+                  </button>
+                </div>
+
                 {currentLocation?.attribution && (
                   <a
                     href={currentLocation.attribution.sourceUrl}
@@ -291,6 +393,9 @@ const GeoGuessGame: React.FC = () => {
                       preserveAspectRatio="none"
                       className="absolute top-0 left-0 w-full h-full"
                     >
+                      {/* Country border overlay — projected with the same equirectangular
+                          formula as pins, so they align. Drawn first so other layers render on top. */}
+                      <CountryBorders />
                       {!gameOver && (
                         <>
                           {divisionLines}
