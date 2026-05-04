@@ -408,18 +408,19 @@ const GeoGuessGame: React.FC = () => {
                 )}
               </div>
 
-              {/* Right column reserves space; the Leaflet map sits vertically centered
-                  and hover-scales 2.4x, overlaying the image without pushing layout.
-                  We use CSS transform on the wrapper for the hover-scale; Leaflet's
-                  click coordinates use getBoundingClientRect which is transform-aware,
-                  so clicks at any scale resolve to the correct lat/lng. */}
+              {/* Right column reserves space; the Leaflet map sits vertically
+                  centered and grows on hover by animating WIDTH (not transform-scale).
+                  Width-based growth lets Leaflet's ResizeObserver fetch crisp tiles
+                  at the new size — no stretched-pixel blur. The container is
+                  anchored at right-0 so it grows leftward into the image area. */}
               <div className="flex-1 relative">
-                <div className="absolute top-1/2 right-0 -translate-y-1/2 z-10 w-full origin-right transition-transform duration-300 ease-out hover:scale-[2.4] hover:z-50">
+                <div className="absolute top-1/2 right-0 -translate-y-1/2 z-10 w-full hover:w-[260%] transition-all duration-300 ease-out hover:z-50">
                   <div className="relative rounded-lg overflow-hidden border-2 border-white shadow-xl aspect-[2/1] bg-blue-50">
                     <MapPicker
                       round={round}
                       target={currentLocation ? { lat: currentLocation.lat, lng: currentLocation.lng, name: currentLocation.name } : undefined}
                       click={clickedLatLng}
+                      guessedRegion={guessedRegion}
                       isCorrect={isCorrectGuess}
                       reveal={revealLocation}
                       disabled={gameOver || guessedRegion !== null}
