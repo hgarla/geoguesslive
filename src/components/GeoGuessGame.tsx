@@ -4,6 +4,7 @@ import { Globe, Users, Building2, Languages, Flag, ZoomIn, ZoomOut, RotateCcw } 
 import type { DailyPuzzle, PuzzleLocation } from '@/types';
 import { regionForCoord } from '@/lib/projection';
 import { haversineKm, scoreFromDistance } from '@/lib/distance';
+import { WORLD_ASPECT } from '@/lib/mapBounds';
 
 // Leaflet touches window/document on import, so the map widget is loaded
 // client-side only. Pages Router has no 'use client' directive.
@@ -415,7 +416,10 @@ const GeoGuessGame: React.FC = () => {
                   anchored at right-0 so it grows leftward into the image area. */}
               <div className="flex-1 relative">
                 <div className="absolute top-1/2 right-0 -translate-y-1/2 z-10 w-full hover:w-[260%] transition-all duration-300 ease-out hover:z-50">
-                  <div className="relative rounded-lg overflow-hidden border-2 border-white shadow-xl aspect-[2/1] bg-blue-50">
+                  <div
+                    className="relative rounded-lg overflow-hidden border-2 border-white shadow-xl bg-blue-50"
+                    style={{ aspectRatio: WORLD_ASPECT }}
+                  >
                     <MapPicker
                       round={round}
                       target={currentLocation ? { lat: currentLocation.lat, lng: currentLocation.lng, name: currentLocation.name } : undefined}
