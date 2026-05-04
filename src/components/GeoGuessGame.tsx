@@ -482,7 +482,7 @@ const GeoGuessGame: React.FC = () => {
                   actual map is absolutely-positioned over that placeholder so it can
                   grow on hover (top-0 right-0, hover:w-[280%]) without pushing the
                   hints below it around. */}
-              <div className="flex-1 flex flex-col gap-3">
+              <div className="flex-1 flex flex-col gap-6">
                 <RoundProgress
                   results={roundResults}
                   currentRound={round}
@@ -516,6 +516,9 @@ const GeoGuessGame: React.FC = () => {
 
                 {/* Hints */}
                 <div className="flex flex-col gap-2">
+                  <div className="text-center">
+                    <span className="text-sm font-bold text-gray-700">Hints</span>
+                  </div>
                   <div className="flex gap-2 justify-center">
                     <button
                       className={`w-11 h-11 rounded-xl flex items-center justify-center ${
