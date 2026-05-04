@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { dateKey, pickDailySeeds } from '@/lib/dailyPuzzle';
 import seedImages from '@/data/seedImages.json';
 import { continentOf } from '@/lib/continents';
+import { flagUrlOf } from '@/lib/flagCodes';
 import type { DailyPuzzle, PuzzleLocation, SeedImageEntry } from '@/types';
 
 const images = seedImages as Record<string, SeedImageEntry>;
@@ -23,7 +24,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<DailyP
         language: s.language,
         continent: continentOf(s.country),
       },
-      flag: s.flag,
+      flag: flagUrlOf(s.country),
       image: img?.url || '',
       attribution: img?.attribution,
     };
