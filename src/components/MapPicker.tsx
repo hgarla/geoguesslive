@@ -1,10 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { MapContainer, Polygon, Polyline, CircleMarker, Marker, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Polygon, Polyline, CircleMarker, Marker, useMap } from 'react-leaflet';
 import L, { type LeafletMouseEvent } from 'leaflet';
-import { feature } from 'topojson-client';
-import type { Topology, GeometryCollection } from 'topojson-specification';
-import type { Feature, MultiPolygon, Polygon as GJPolygon } from 'geojson';
-import topology from 'world-atlas/countries-110m.json';
 import { roundConfigs } from '@/lib/projection';
 import { SOUTH_LIMIT, NORTH_LIMIT, WORLD_BOUNDS } from '@/lib/mapBounds';
 
@@ -39,62 +35,34 @@ function ResizeWatcher() {
   return null;
 }
 
-// On mount and on every map resize, fit world bounds and lock minZoom to the
-// fitted level. Player can zoom in but never zoom out past the playable world.
+// Fit the world bounds and lock minZoom on every Leaflet resize event.
+// The IMMEDIATE fit follows the container during the CSS transition.
+// The DEBOUNCED fit (~350ms after the last resize) guarantees a clean
+// final reset to whole-world view once the transition has settled —
+// this is what fixes the "rest state shows only a fragment after hover"
+// bug.
 function FitAndLockBounds() {
   const map = useMap();
   useEffect(() => {
-    const update = () => {
+    let finalTimer: ReturnType<typeof setTimeout> | null = null;
+    const fit = () => {
       const z = map.getBoundsZoom(WORLD_BOUNDS, false);
       map.setMinZoom(z);
       map.fitBounds(WORLD_BOUNDS, { padding: [0, 0], animate: false });
     };
-    update();
-    map.on('resize', update);
-    return () => { map.off('resize', update); };
+    const onResize = () => {
+      fit();
+      if (finalTimer) clearTimeout(finalTimer);
+      finalTimer = setTimeout(fit, 350);
+    };
+    fit();
+    map.on('resize', onResize);
+    return () => {
+      map.off('resize', onResize);
+      if (finalTimer) clearTimeout(finalTimer);
+    };
   }, [map]);
   return null;
-}
-
-// SVG country fills + borders, projected by Leaflet (CRS handles lat/lng -> px).
-type CountryFeature = Feature<GJPolygon | MultiPolygon>;
-
-function CountriesLayer() {
-  const features = useMemo<CountryFeature[]>(() => {
-    const topo = topology as unknown as Topology;
-    const collection = feature(topo, topo.objects.countries as GeometryCollection) as unknown as { features: CountryFeature[] };
-    return collection.features.filter(f => f.geometry.type === 'Polygon' || f.geometry.type === 'MultiPolygon');
-  }, []);
-
-  return (
-    <>
-      {features.map((f, i) => {
-        let positions: [number, number][][] | [number, number][][][] = [];
-        if (f.geometry.type === 'Polygon') {
-          positions = f.geometry.coordinates.map(ring =>
-            ring.map(([lng, lat]) => [lat, lng] as [number, number])
-          );
-        } else {
-          positions = f.geometry.coordinates.map(poly =>
-            poly.map(ring => ring.map(([lng, lat]) => [lat, lng] as [number, number]))
-          );
-        }
-        return (
-          <Polygon
-            key={i}
-            positions={positions}
-            pathOptions={{
-              fillColor: '#e5e7eb',
-              fillOpacity: 1,
-              color: '#6b7280',
-              weight: 0.4,
-              interactive: false,
-            }}
-          />
-        );
-      })}
-    </>
-  );
 }
 
 interface Cell {
@@ -124,8 +92,9 @@ export default function MapPicker({ round, target, click, guessedRegion, isCorre
     return lines;
   }, [cfg]);
 
-  // Cells span the playable bounds exactly so all cells are equal in
-  // equirectangular projection, with no degenerate polar slivers.
+  // Cells span the playable bounds exactly so they tile the visible world.
+  // (Visual cell heights vary slightly between rows due to Mercator stretch
+  // near the lat bounds — accepted tradeoff for crisp tile rendering.)
   const cells = useMemo<Cell[]>(() => {
     if (!cfg) return [];
     const out: Cell[] = [];
@@ -173,7 +142,6 @@ export default function MapPicker({ round, target, click, guessedRegion, isCorre
 
   return (
     <MapContainer
-      crs={L.CRS.EPSG4326}
       bounds={WORLD_BOUNDS}
       boundsOptions={{ padding: [0, 0], animate: false }}
       maxBounds={WORLD_BOUNDS}
@@ -182,17 +150,21 @@ export default function MapPicker({ round, target, click, guessedRegion, isCorre
       zoomSnap={0.1}
       scrollWheelZoom
       worldCopyJump={false}
-      attributionControl={false}
       className="w-full h-full"
-      style={{ background: '#cfe7fa' }}
+      style={{ background: '#aad3df' }}
     >
+      <TileLayer
+        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        subdomains="abcd"
+        noWrap
+      />
       <ResizeWatcher />
       <FitAndLockBounds />
-      <CountriesLayer />
 
-      {/* Cell polygons sit above country fills and below the grid lines,
-          so hover tints don't obscure the dashed borders. Cells handle their
-          own click; map.click is intentionally NOT bound to avoid double-fire. */}
+      {/* Cell polygons sit above tiles, below the grid lines. Cells handle
+          their own click; map.click is intentionally NOT bound to avoid
+          double-fire that was making rounds skip. */}
       {cells.map(cell => {
         const isGuessed = guessedRegion === cell.idx;
         const isHovered = !disabled && hoveredIdx === cell.idx;
