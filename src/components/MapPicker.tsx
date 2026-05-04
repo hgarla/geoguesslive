@@ -16,52 +16,63 @@ interface MapPickerProps {
   isCorrect?: boolean | null;
   reveal?: boolean;
   disabled?: boolean;
+  // Wrapper hover state from the parent. When this flips, we schedule
+  // an explicit fit-to-bounds after the CSS transition has settled —
+  // this is the safety net for the "rest state shows only a fragment
+  // after hover" bug.
+  hoverState?: boolean;
   onGuess: (lat: number, lng: number) => void;
 }
 
-// Forces Leaflet to recompute layout when the outer wrapper resizes (hover
-// expand). Without this, the leaflet-container sometimes keeps rendering at
-// the old size inside the larger wrapper.
-function ResizeWatcher() {
+// Single source of truth for resize handling. ResizeObserver fires whenever
+// the leaflet container's box changes — during CSS transitions, on window
+// resize, etc. Each fire: invalidateSize -> read new size -> setMinZoom +
+// fitBounds. Plus a debounced final fit ~400ms after the last observation
+// to guarantee a clean settle.
+function MapAutoFit({ hoverState }: { hoverState?: boolean }) {
   const map = useMap();
   useEffect(() => {
     const el = map.getContainer();
-    const obs = new ResizeObserver(() => {
-      requestAnimationFrame(() => map.invalidateSize({ animate: false }));
-    });
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, [map]);
-  return null;
-}
+    let lastTimer: ReturnType<typeof setTimeout> | null = null;
 
-// Fit the world bounds and lock minZoom on every Leaflet resize event.
-// The IMMEDIATE fit follows the container during the CSS transition.
-// The DEBOUNCED fit (~350ms after the last resize) guarantees a clean
-// final reset to whole-world view once the transition has settled —
-// this is what fixes the "rest state shows only a fragment after hover"
-// bug.
-function FitAndLockBounds() {
-  const map = useMap();
-  useEffect(() => {
-    let finalTimer: ReturnType<typeof setTimeout> | null = null;
-    const fit = () => {
+    const performFit = () => {
+      map.invalidateSize({ animate: false });
       const z = map.getBoundsZoom(WORLD_BOUNDS, false);
       map.setMinZoom(z);
       map.fitBounds(WORLD_BOUNDS, { padding: [0, 0], animate: false });
     };
-    const onResize = () => {
-      fit();
-      if (finalTimer) clearTimeout(finalTimer);
-      finalTimer = setTimeout(fit, 350);
+
+    const scheduleFinal = () => {
+      if (lastTimer) clearTimeout(lastTimer);
+      lastTimer = setTimeout(performFit, 400);
     };
-    fit();
-    map.on('resize', onResize);
+
+    const obs = new ResizeObserver(() => {
+      performFit();
+      scheduleFinal();
+    });
+    obs.observe(el);
+    performFit();
+
     return () => {
-      map.off('resize', onResize);
-      if (finalTimer) clearTimeout(finalTimer);
+      obs.disconnect();
+      if (lastTimer) clearTimeout(lastTimer);
     };
   }, [map]);
+
+  // Safety net: when the parent's hover state flips, force a fit shortly
+  // after the CSS transition would settle. Catches the case where
+  // ResizeObserver missed the final intermediate frames.
+  useEffect(() => {
+    const t = setTimeout(() => {
+      map.invalidateSize({ animate: false });
+      const z = map.getBoundsZoom(WORLD_BOUNDS, false);
+      map.setMinZoom(z);
+      map.fitBounds(WORLD_BOUNDS, { padding: [0, 0], animate: false });
+    }, 350);
+    return () => clearTimeout(t);
+  }, [map, hoverState]);
+
   return null;
 }
 
@@ -72,7 +83,7 @@ interface Cell {
   centerLng: number;
 }
 
-export default function MapPicker({ round, target, click, guessedRegion, isCorrect, reveal, disabled, onGuess }: MapPickerProps) {
+export default function MapPicker({ round, target, click, guessedRegion, isCorrect, reveal, disabled, hoverState, onGuess }: MapPickerProps) {
   const cfg = roundConfigs[round];
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
@@ -159,8 +170,7 @@ export default function MapPicker({ round, target, click, guessedRegion, isCorre
         subdomains="abcd"
         noWrap
       />
-      <ResizeWatcher />
-      <FitAndLockBounds />
+      <MapAutoFit hoverState={hoverState} />
 
       {/* Cell polygons sit above tiles, below the grid lines. Cells handle
           their own click; map.click is intentionally NOT bound to avoid
@@ -210,8 +220,8 @@ export default function MapPicker({ round, target, click, guessedRegion, isCorre
           icon={L.divIcon({
             className: 'region-num-wrapper',
             html: `<span class="region-num">${cell.idx + 1}</span>`,
-            iconSize: [40, 18],
-            iconAnchor: [20, 9],
+            iconSize: [80, 48],
+            iconAnchor: [40, 24],
           })}
         />
       ))}
