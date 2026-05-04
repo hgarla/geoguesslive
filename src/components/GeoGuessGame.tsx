@@ -1,21 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import dynamic from 'next/dynamic';
 import { Globe, Users, Building2, Languages, Flag, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
 import type { DailyPuzzle, PuzzleLocation } from '@/types';
 import { regionForCoord } from '@/lib/projection';
 import { haversineKm, scoreFromDistance } from '@/lib/distance';
 import { WORLD_ASPECT } from '@/lib/mapBounds';
-
-// Leaflet touches window/document on import, so the map widget is loaded
-// client-side only. Pages Router has no 'use client' directive.
-const MapPicker = dynamic(() => import('./MapPicker'), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full flex items-center justify-center text-xs text-gray-500 bg-blue-50">
-      Loading map…
-    </div>
-  ),
-});
+import MapPicker from './MapPicker';
 
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 5;
@@ -62,10 +51,6 @@ const GeoGuessGame: React.FC = () => {
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isPanning, setIsPanning] = useState(false);
 
-  // Tracks whether the cursor is over the map wrapper. Forwarded to MapPicker
-  // so it can force an explicit fitBounds after the CSS hover transition
-  // settles, even if Leaflet's resize observer missed the final frame.
-  const [mapHovered, setMapHovered] = useState(false);
   const panStart = useRef<{ mx: number; my: number; px: number; py: number } | null>(null);
   const imageBoxRef = useRef<HTMLDivElement>(null);
 
@@ -420,11 +405,7 @@ const GeoGuessGame: React.FC = () => {
                   at the new size — no stretched-pixel blur. The container is
                   anchored at right-0 so it grows leftward into the image area. */}
               <div className="flex-1 relative">
-                <div
-                  className="absolute top-1/2 right-0 -translate-y-1/2 z-10 w-full hover:w-[260%] transition-all duration-300 ease-out hover:z-50"
-                  onMouseEnter={() => setMapHovered(true)}
-                  onMouseLeave={() => setMapHovered(false)}
-                >
+                <div className="absolute top-1/2 right-0 -translate-y-1/2 z-10 w-full hover:w-[260%] transition-all duration-300 ease-out hover:z-50">
                   <div
                     className="relative rounded-lg overflow-hidden border-2 border-white shadow-xl bg-blue-50"
                     style={{ aspectRatio: WORLD_ASPECT }}
@@ -437,7 +418,6 @@ const GeoGuessGame: React.FC = () => {
                       isCorrect={isCorrectGuess}
                       reveal={revealLocation}
                       disabled={gameOver || guessedRegion !== null}
-                      hoverState={mapHovered}
                       onGuess={handleMapGuess}
                     />
                   </div>
