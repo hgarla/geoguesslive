@@ -32,9 +32,9 @@ export interface PuzzleLocation {
   lat: number;
   lng: number;
   demographics: {
-    population: string;
     capital: string;
     language: string;
+    continent: string;
   };
   flag: string;
   image: string;

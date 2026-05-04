@@ -1,5 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Globe, Users, Building2, Languages, Flag, ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
+import {
+  Globe,
+  Building2,
+  Languages,
+  Flag,
+  ZoomIn,
+  ZoomOut,
+  RotateCcw,
+  Check,
+  X,
+  Map as MapIcon,
+} from 'lucide-react';
 import type { DailyPuzzle, PuzzleLocation } from '@/types';
 import { regionForCoord } from '@/lib/projection';
 import { haversineKm, scoreFromDistance } from '@/lib/distance';
@@ -12,11 +23,11 @@ const clamp = (n: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, n
 
 const TOTAL_ROUNDS = 8;
 
-type PowerupKey = 'countryName' | 'population' | 'capital' | 'language' | 'flag';
+type PowerupKey = 'countryName' | 'continent' | 'capital' | 'language' | 'flag';
 type PowerupState = Record<PowerupKey, { active: boolean; used: boolean }>;
 const initialPowerups: PowerupState = {
   countryName: { active: false, used: false },
-  population: { active: false, used: false },
+  continent: { active: false, used: false },
   capital: { active: false, used: false },
   language: { active: false, used: false },
   flag: { active: false, used: false },
@@ -24,6 +35,74 @@ const initialPowerups: PowerupState = {
 
 function todayLabel() {
   return new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+type RoundResult = { correct: boolean; score: number; km: number };
+
+// Horizontal row of TOTAL_ROUNDS dots that fills with green-check / red-X as
+// each round resolves. The currently-active round is highlighted with a
+// pulsing blue ring; not-yet-played rounds are numbered ghosts.
+function RoundProgress({
+  results,
+  currentRound,
+  totalRounds,
+  gameOver,
+}: {
+  results: RoundResult[];
+  currentRound: number;
+  totalRounds: number;
+  gameOver: boolean;
+}) {
+  return (
+    <div className="flex items-center justify-between gap-1">
+      {Array.from({ length: totalRounds }, (_, i) => {
+        const result = results[i];
+        if (result) {
+          if (result.correct) {
+            return (
+              <div
+                key={i}
+                className="w-7 h-7 rounded-full bg-green-500 text-white flex items-center justify-center shadow-sm"
+                title={`Round ${i + 1}: correct (${result.score} pts)`}
+              >
+                <Check className="w-4 h-4" strokeWidth={3.5} />
+              </div>
+            );
+          }
+          return (
+            <div
+              key={i}
+              className="w-7 h-7 rounded-full bg-red-500 text-white flex items-center justify-center shadow-sm"
+              title={`Round ${i + 1}: missed (${result.score} pts)`}
+            >
+              <X className="w-4 h-4" strokeWidth={3.5} />
+            </div>
+          );
+        }
+        const isCurrent = !gameOver && currentRound - 1 === i;
+        if (isCurrent) {
+          return (
+            <div
+              key={i}
+              className="w-7 h-7 rounded-full border-2 border-blue-500 bg-white text-blue-600 flex items-center justify-center text-xs font-bold animate-pulse"
+              title={`Round ${i + 1} (current)`}
+            >
+              {i + 1}
+            </div>
+          );
+        }
+        return (
+          <div
+            key={i}
+            className="w-7 h-7 rounded-full border-2 border-gray-300 bg-gray-50 text-gray-400 flex items-center justify-center text-xs font-bold"
+            title={`Round ${i + 1}`}
+          >
+            {i + 1}
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
 const GeoGuessGame: React.FC = () => {
@@ -42,8 +121,7 @@ const GeoGuessGame: React.FC = () => {
   const [distanceKm, setDistanceKm] = useState<number | null>(null);
   const [powerups, setPowerups] = useState<PowerupState>(initialPowerups);
 
-  // Per-round outcomes — drives the game-over stats panel.
-  type RoundResult = { correct: boolean; score: number; km: number };
+  // Per-round outcomes — drives the round-progress dots and game-over stats.
   const [roundResults, setRoundResults] = useState<RoundResult[]>([]);
 
   // Image zoom + pan. Resets on every round change.
@@ -74,7 +152,7 @@ const GeoGuessGame: React.FC = () => {
   useEffect(() => {
     setPowerups(prev => ({
       countryName: { active: false, used: prev.countryName.used },
-      population: { active: false, used: prev.population.used },
+      continent: { active: false, used: prev.continent.used },
       capital: { active: false, used: prev.capital.used },
       language: { active: false, used: prev.language.used },
       flag: { active: false, used: prev.flag.used },
@@ -399,140 +477,146 @@ const GeoGuessGame: React.FC = () => {
                 )}
               </div>
 
-              {/* Right column reserves space; the Leaflet map sits vertically
-                  centered and grows on hover by animating WIDTH (not transform-scale).
-                  Width-based growth lets Leaflet's ResizeObserver fetch crisp tiles
-                  at the new size — no stretched-pixel blur. The container is
-                  anchored at right-0 so it grows leftward into the image area. */}
-              <div className="flex-1 relative">
-                <div className="absolute top-1/2 right-0 -translate-y-1/2 z-10 w-full hover:w-[260%] transition-all duration-300 ease-out hover:z-50">
-                  <div
-                    className="relative rounded-lg overflow-hidden border-2 border-white shadow-xl bg-blue-50"
-                    style={{ aspectRatio: WORLD_ASPECT }}
-                  >
-                    <MapPicker
-                      round={round}
-                      target={currentLocation ? { lat: currentLocation.lat, lng: currentLocation.lng, name: currentLocation.name } : undefined}
-                      click={clickedLatLng}
-                      guessedRegion={guessedRegion}
-                      isCorrect={isCorrectGuess}
-                      reveal={revealLocation}
-                      disabled={gameOver || guessedRegion !== null}
-                      onGuess={handleMapGuess}
-                    />
-                  </div>
-                  <p className="text-[10px] text-center mt-1 text-gray-700">
-                    Hover to enlarge · scroll to zoom · click to guess
-                  </p>
-                </div>
-              </div>
-            </div>
+              {/* RIGHT COLUMN: round-progress dots, then map, then hint buttons + info.
+                  Map at rest sits in flow with a placeholder reserving its size; the
+                  actual map is absolutely-positioned over that placeholder so it can
+                  grow on hover (top-0 right-0, hover:w-[280%]) without pushing the
+                  hints below it around. */}
+              <div className="flex-1 flex flex-col gap-3">
+                <RoundProgress
+                  results={roundResults}
+                  currentRound={round}
+                  totalRounds={TOTAL_ROUNDS}
+                  gameOver={gameOver}
+                />
 
-            {/* Hints row below the image/map row */}
-            <div className="mt-4 flex items-start gap-4">
-              <div className="flex flex-col items-center">
-                <span className="text-sm font-bold text-gray-700 mb-1">Hints</span>
-                <div className="flex gap-2">
-                  <button
-                    className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                      powerups.countryName.used
-                        ? 'bg-gray-200 cursor-not-allowed opacity-50'
-                        : 'bg-blue-500 hover:bg-blue-600 shadow-md'
-                    }`}
-                    disabled={powerups.countryName.used}
-                    onClick={() => setPowerups(p => ({ ...p, countryName: { active: true, used: true } }))}
-                    title="Country name"
-                  >
-                    <Globe className="w-7 h-7 text-white" strokeWidth={2} />
-                  </button>
-                  <button
-                    className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                      powerups.population.used
-                        ? 'bg-gray-200 cursor-not-allowed opacity-50'
-                        : 'bg-green-500 hover:bg-green-600 shadow-md'
-                    }`}
-                    disabled={powerups.population.used}
-                    onClick={() => setPowerups(p => ({ ...p, population: { active: true, used: true } }))}
-                    title="Population"
-                  >
-                    <Users className="w-7 h-7 text-white" strokeWidth={2} />
-                  </button>
-                  <button
-                    className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                      powerups.capital.used
-                        ? 'bg-gray-200 cursor-not-allowed opacity-50'
-                        : 'bg-purple-500 hover:bg-purple-600 shadow-md'
-                    }`}
-                    disabled={powerups.capital.used}
-                    onClick={() => setPowerups(p => ({ ...p, capital: { active: true, used: true } }))}
-                    title="Capital"
-                  >
-                    <Building2 className="w-7 h-7 text-white" strokeWidth={2} />
-                  </button>
-                  <button
-                    className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                      powerups.language.used
-                        ? 'bg-gray-200 cursor-not-allowed opacity-50'
-                        : 'bg-orange-500 hover:bg-orange-600 shadow-md'
-                    }`}
-                    disabled={powerups.language.used}
-                    onClick={() => setPowerups(p => ({ ...p, language: { active: true, used: true } }))}
-                    title="Language"
-                  >
-                    <Languages className="w-7 h-7 text-white" strokeWidth={2} />
-                  </button>
-                  <button
-                    className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                      powerups.flag.used
-                        ? 'bg-gray-200 cursor-not-allowed opacity-50'
-                        : 'bg-red-500 hover:bg-red-600 shadow-md'
-                    }`}
-                    disabled={powerups.flag.used}
-                    onClick={() => setPowerups(p => ({ ...p, flag: { active: true, used: true } }))}
-                    title="Flag"
-                  >
-                    <Flag className="w-7 h-7 text-white" strokeWidth={2} />
-                  </button>
-                </div>
-              </div>
-
-              <div className="flex-1 grid grid-cols-5 gap-2">
-                {powerups.countryName.active && currentLocation && (
-                  <div className="p-2 bg-blue-50 rounded-lg text-xs">
-                    <h3 className="font-bold text-blue-700">Country</h3>
-                    <p>{currentLocation.country}</p>
-                  </div>
-                )}
-                {powerups.population.active && currentLocation && (
-                  <div className="p-2 bg-green-50 rounded-lg text-xs">
-                    <h3 className="font-bold text-green-700">Population</h3>
-                    <p>{currentLocation.demographics.population}</p>
-                  </div>
-                )}
-                {powerups.capital.active && currentLocation && (
-                  <div className="p-2 bg-purple-50 rounded-lg text-xs">
-                    <h3 className="font-bold text-purple-700">Capital</h3>
-                    <p>{currentLocation.demographics.capital}</p>
-                  </div>
-                )}
-                {powerups.language.active && currentLocation && (
-                  <div className="p-2 bg-orange-50 rounded-lg text-xs">
-                    <h3 className="font-bold text-orange-700">Language</h3>
-                    <p>{currentLocation.demographics.language}</p>
-                  </div>
-                )}
-                {powerups.flag.active && currentLocation && (
-                  <div className="p-2 bg-red-50 rounded-lg text-xs">
-                    <h3 className="font-bold text-red-700">Flag</h3>
-                    <div className="w-full h-12 flex items-center justify-center">
-                      <img
-                        src={currentLocation.flag}
-                        alt={`Flag of ${currentLocation.country}`}
-                        className="max-w-full max-h-full object-contain"
+                <div className="relative">
+                  <div style={{ aspectRatio: WORLD_ASPECT }} aria-hidden className="invisible" />
+                  <div className="absolute top-0 right-0 z-10 w-full hover:w-[280%] transition-all duration-300 ease-out hover:z-50">
+                    <div
+                      className="relative rounded-lg overflow-hidden border-2 border-white shadow-xl bg-blue-50"
+                      style={{ aspectRatio: WORLD_ASPECT }}
+                    >
+                      <MapPicker
+                        round={round}
+                        target={currentLocation ? { lat: currentLocation.lat, lng: currentLocation.lng, name: currentLocation.name } : undefined}
+                        click={clickedLatLng}
+                        guessedRegion={guessedRegion}
+                        isCorrect={isCorrectGuess}
+                        reveal={revealLocation}
+                        disabled={gameOver || guessedRegion !== null}
+                        onGuess={handleMapGuess}
                       />
                     </div>
+                    <p className="text-[10px] text-center mt-1 text-gray-700">
+                      Hover to enlarge · click to guess
+                    </p>
                   </div>
-                )}
+                </div>
+
+                {/* Hints */}
+                <div className="flex flex-col gap-2">
+                  <div className="flex gap-2 justify-center">
+                    <button
+                      className={`w-11 h-11 rounded-xl flex items-center justify-center ${
+                        powerups.countryName.used
+                          ? 'bg-gray-200 cursor-not-allowed opacity-50'
+                          : 'bg-blue-500 hover:bg-blue-600 shadow-md'
+                      }`}
+                      disabled={powerups.countryName.used}
+                      onClick={() => setPowerups(p => ({ ...p, countryName: { active: true, used: true } }))}
+                      title="Country name"
+                    >
+                      <Globe className="w-6 h-6 text-white" strokeWidth={2} />
+                    </button>
+                    <button
+                      className={`w-11 h-11 rounded-xl flex items-center justify-center ${
+                        powerups.continent.used
+                          ? 'bg-gray-200 cursor-not-allowed opacity-50'
+                          : 'bg-green-500 hover:bg-green-600 shadow-md'
+                      }`}
+                      disabled={powerups.continent.used}
+                      onClick={() => setPowerups(p => ({ ...p, continent: { active: true, used: true } }))}
+                      title="Continent"
+                    >
+                      <MapIcon className="w-6 h-6 text-white" strokeWidth={2} />
+                    </button>
+                    <button
+                      className={`w-11 h-11 rounded-xl flex items-center justify-center ${
+                        powerups.capital.used
+                          ? 'bg-gray-200 cursor-not-allowed opacity-50'
+                          : 'bg-purple-500 hover:bg-purple-600 shadow-md'
+                      }`}
+                      disabled={powerups.capital.used}
+                      onClick={() => setPowerups(p => ({ ...p, capital: { active: true, used: true } }))}
+                      title="Capital"
+                    >
+                      <Building2 className="w-6 h-6 text-white" strokeWidth={2} />
+                    </button>
+                    <button
+                      className={`w-11 h-11 rounded-xl flex items-center justify-center ${
+                        powerups.language.used
+                          ? 'bg-gray-200 cursor-not-allowed opacity-50'
+                          : 'bg-orange-500 hover:bg-orange-600 shadow-md'
+                      }`}
+                      disabled={powerups.language.used}
+                      onClick={() => setPowerups(p => ({ ...p, language: { active: true, used: true } }))}
+                      title="Language"
+                    >
+                      <Languages className="w-6 h-6 text-white" strokeWidth={2} />
+                    </button>
+                    <button
+                      className={`w-11 h-11 rounded-xl flex items-center justify-center ${
+                        powerups.flag.used
+                          ? 'bg-gray-200 cursor-not-allowed opacity-50'
+                          : 'bg-red-500 hover:bg-red-600 shadow-md'
+                      }`}
+                      disabled={powerups.flag.used}
+                      onClick={() => setPowerups(p => ({ ...p, flag: { active: true, used: true } }))}
+                      title="Flag"
+                    >
+                      <Flag className="w-6 h-6 text-white" strokeWidth={2} />
+                    </button>
+                  </div>
+
+                  {/* Active hint info, stacked vertically below the buttons. */}
+                  <div className="flex flex-col gap-1.5">
+                    {powerups.countryName.active && currentLocation && (
+                      <div className="px-2.5 py-1.5 bg-blue-50 rounded text-xs flex items-center gap-2">
+                        <span className="font-bold text-blue-700">Country:</span>
+                        <span>{currentLocation.country}</span>
+                      </div>
+                    )}
+                    {powerups.continent.active && currentLocation && (
+                      <div className="px-2.5 py-1.5 bg-green-50 rounded text-xs flex items-center gap-2">
+                        <span className="font-bold text-green-700">Continent:</span>
+                        <span>{currentLocation.demographics.continent}</span>
+                      </div>
+                    )}
+                    {powerups.capital.active && currentLocation && (
+                      <div className="px-2.5 py-1.5 bg-purple-50 rounded text-xs flex items-center gap-2">
+                        <span className="font-bold text-purple-700">Capital:</span>
+                        <span>{currentLocation.demographics.capital}</span>
+                      </div>
+                    )}
+                    {powerups.language.active && currentLocation && (
+                      <div className="px-2.5 py-1.5 bg-orange-50 rounded text-xs flex items-center gap-2">
+                        <span className="font-bold text-orange-700">Language:</span>
+                        <span>{currentLocation.demographics.language}</span>
+                      </div>
+                    )}
+                    {powerups.flag.active && currentLocation && (
+                      <div className="px-2.5 py-1.5 bg-red-50 rounded text-xs flex items-center gap-2">
+                        <span className="font-bold text-red-700">Flag:</span>
+                        <img
+                          src={currentLocation.flag}
+                          alt={`Flag of ${currentLocation.country}`}
+                          className="h-5 object-contain"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
 
