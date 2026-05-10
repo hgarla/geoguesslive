@@ -364,7 +364,15 @@ const GeoGuessGame: React.FC = () => {
               className="text-6xl font-bold mb-4 text-center"
               style={{ fontFamily: 'Fredoka One, cursive', textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}
             >
-              GeoGuess
+              geoguess<span
+                className="text-blue-500"
+                style={{
+                  fontFamily: '"Helvetica Neue", Inter, system-ui, sans-serif',
+                  fontStyle: 'italic',
+                  fontWeight: 300,
+                  textShadow: 'none',
+                }}
+              >.live</span>
             </h1>
             <p className="text-xl text-gray-700 mb-8 text-center">Guess the location of world landmarks</p>
             {puzzleError && <p className="text-red-600 mb-4 text-sm">Error loading puzzle: {puzzleError}</p>}
@@ -384,7 +392,15 @@ const GeoGuessGame: React.FC = () => {
               className="text-6xl font-bold mb-6"
               style={{ fontFamily: 'Fredoka One, cursive', textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}
             >
-              GeoGuess
+              geoguess<span
+                className="text-blue-500"
+                style={{
+                  fontFamily: '"Helvetica Neue", Inter, system-ui, sans-serif',
+                  fontStyle: 'italic',
+                  fontWeight: 300,
+                  textShadow: 'none',
+                }}
+              >.live</span>
             </h1>
             <p className="text-xl text-gray-600 mb-10">{todayLabel()}</p>
             <div className="flex justify-center gap-12">
