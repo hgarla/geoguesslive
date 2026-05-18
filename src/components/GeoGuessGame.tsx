@@ -355,13 +355,13 @@ const GeoGuessGame: React.FC = () => {
   return (
     <div className="min-h-screen w-screen bg-blue-100 fixed inset-0 overflow-auto">
       {!gameStarted ? (
-        <div className="flex flex-col items-center justify-center min-h-screen w-full">
-          <div className="border-8 border-black px-20 py-16 flex flex-col items-center max-w-lg">
-            <div className="w-24 h-24 mb-8">
+        <div className="flex flex-col items-center justify-center min-h-screen w-full px-4">
+          <div className="border-4 sm:border-8 border-black px-6 py-10 sm:px-20 sm:py-16 flex flex-col items-center w-full max-w-lg">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 mb-6 sm:mb-8">
               <img src="/images/earth.webp" alt="Globe icon" className="w-full h-full object-contain" />
             </div>
             <h1
-              className="text-6xl font-bold mb-4 text-center"
+              className="text-4xl sm:text-6xl font-bold mb-4 text-center"
               style={{ fontFamily: 'Fredoka One, cursive', textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}
             >
               geoguess<span
@@ -374,7 +374,7 @@ const GeoGuessGame: React.FC = () => {
                 }}
               >.live</span>
             </h1>
-            <p className="text-xl text-gray-700 mb-8 text-center">Guess the location of world landmarks</p>
+            <p className="text-base sm:text-xl text-gray-700 mb-6 sm:mb-8 text-center">Guess the location of world landmarks</p>
             {puzzleError && <p className="text-red-600 mb-4 text-sm">Error loading puzzle: {puzzleError}</p>}
             <button
               className="bg-black text-white px-12 py-3 rounded-full text-xl font-semibold hover:bg-gray-800 transition-colors disabled:opacity-50"
@@ -387,9 +387,9 @@ const GeoGuessGame: React.FC = () => {
         </div>
       ) : (
         <div className="min-h-screen bg-blue-100">
-          <div className="container mx-auto px-4 pt-8 pb-6 text-center">
+          <div className="container mx-auto px-4 pt-4 sm:pt-8 pb-4 sm:pb-6 text-center">
             <h1
-              className="text-6xl font-bold mb-6"
+              className="text-4xl sm:text-6xl font-bold mb-3 sm:mb-6"
               style={{ fontFamily: 'Fredoka One, cursive', textShadow: '2px 2px 4px rgba(0,0,0,0.2)' }}
             >
               geoguess<span
@@ -402,22 +402,23 @@ const GeoGuessGame: React.FC = () => {
                 }}
               >.live</span>
             </h1>
-            <p className="text-xl text-gray-600 mb-10">{todayLabel()}</p>
-            <div className="flex justify-center gap-12">
+            <p className="text-base sm:text-xl text-gray-600 mb-4 sm:mb-10">{todayLabel()}</p>
+            <div className="flex justify-center gap-8 sm:gap-12">
               <div className="text-center">
-                <p className="text-sm text-gray-600">Round</p>
-                <p className="text-2xl font-bold text-blue-600">{round}/{TOTAL_ROUNDS}</p>
+                <p className="text-xs sm:text-sm text-gray-600">Round</p>
+                <p className="text-xl sm:text-2xl font-bold text-blue-600">{round}/{TOTAL_ROUNDS}</p>
               </div>
               <div className="text-center">
-                <p className="text-sm text-gray-600">Score</p>
-                <p className="text-2xl font-bold text-green-600">{score}</p>
+                <p className="text-xs sm:text-sm text-gray-600">Score</p>
+                <p className="text-xl sm:text-2xl font-bold text-green-600">{score}</p>
               </div>
             </div>
           </div>
 
           <div className="container mx-auto px-4">
-            {/* Image + map row — both float directly on the page background. */}
-            <div className="flex gap-4 items-stretch">
+            {/* Image + map row — both float directly on the page background.
+                Stacks vertically on mobile, side-by-side on lg+. */}
+            <div className="flex flex-col lg:flex-row gap-4 items-stretch">
               {/* Zoomable image. Scroll to zoom (cursor over image), drag to pan when zoomed. */}
               <div
                 ref={imageBoxRef}
@@ -425,7 +426,7 @@ const GeoGuessGame: React.FC = () => {
                 onMouseMove={movePan}
                 onMouseUp={endPan}
                 onMouseLeave={endPan}
-                className={`w-[65%] aspect-video bg-gray-200 rounded-lg overflow-hidden relative shadow-lg ${
+                className={`w-full lg:w-[65%] aspect-video bg-gray-200 rounded-lg overflow-hidden relative shadow-lg ${
                   zoom > 1 ? (isPanning ? 'cursor-grabbing' : 'cursor-grab') : 'cursor-default'
                 }`}
               >
@@ -498,7 +499,7 @@ const GeoGuessGame: React.FC = () => {
                   actual map is absolutely-positioned over that placeholder so it can
                   grow on hover (top-0 right-0, hover:w-[280%]) without pushing the
                   hints below it around. */}
-              <div className="flex-1 flex flex-col gap-10">
+              <div className="flex-1 flex flex-col gap-4 sm:gap-6 lg:gap-10">
                 <RoundProgress
                   results={roundResults}
                   currentRound={round}
@@ -506,7 +507,31 @@ const GeoGuessGame: React.FC = () => {
                   gameOver={gameOver}
                 />
 
-                <div className="relative">
+                {/* Map. On mobile / tablet it just sits inline at full container
+                    width — no hover trickery, since touch devices don't hover and
+                    a tiny map is unguessable. On lg+ it keeps the hover-to-enlarge
+                    behavior the desktop layout was designed around. */}
+                <div className="block lg:hidden">
+                  <div
+                    className="relative rounded-lg overflow-hidden border-2 border-white shadow-xl bg-blue-50 w-full"
+                    style={{ aspectRatio: WORLD_ASPECT }}
+                  >
+                    <MapPicker
+                      round={round}
+                      target={currentLocation ? { lat: currentLocation.lat, lng: currentLocation.lng, name: currentLocation.name } : undefined}
+                      click={clickedLatLng}
+                      guessedRegion={guessedRegion}
+                      isCorrect={isCorrectGuess}
+                      reveal={revealLocation}
+                      disabled={gameOver || guessedRegion !== null}
+                      onGuess={handleMapGuess}
+                    />
+                  </div>
+                  <p className="text-[10px] text-center mt-1 text-gray-700">
+                    Tap a region to guess
+                  </p>
+                </div>
+                <div className="relative hidden lg:block">
                   <div style={{ aspectRatio: WORLD_ASPECT }} aria-hidden className="invisible" />
                   <div className="absolute top-0 right-0 z-10 w-full hover:w-[280%] transition-all duration-300 ease-out hover:z-50">
                     <div
@@ -641,7 +666,7 @@ const GeoGuessGame: React.FC = () => {
 
             {/* Feedback line */}
             {guessedRegion !== null && currentLocation && (
-              <p className="text-sm mt-3 w-[65%]">
+              <p className="text-sm mt-3 w-full lg:w-[65%]">
                 {isCorrectGuess ? (
                   <span className="text-green-600 font-semibold">Correct region! </span>
                 ) : (
@@ -657,8 +682,8 @@ const GeoGuessGame: React.FC = () => {
       )}
 
       {gameOver && (
-        <div className="fixed inset-0 bg-blue-100 flex items-center justify-center z-50">
-          <div className="border-8 border-black px-20 py-16 flex flex-col items-center max-w-lg bg-blue-100 relative z-50">
+        <div className="fixed inset-0 bg-blue-100 flex items-center justify-center z-50 p-4">
+          <div className="border-4 sm:border-8 border-black px-6 py-10 sm:px-20 sm:py-16 flex flex-col items-center w-full max-w-lg bg-blue-100 relative z-50">
             <button
               className="absolute top-4 right-4 text-2xl font-bold hover:text-gray-700 z-50"
               onClick={resetGame}
