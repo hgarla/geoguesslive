@@ -12,7 +12,7 @@ import {
   Map as MapIcon,
 } from 'lucide-react';
 import type { DailyPuzzle, PuzzleLocation } from '@/types';
-import { regionForCoord } from '@/lib/projection';
+import { regionForCoord, isNearRegionBorder } from '@/lib/projection';
 import { haversineKm, scoreFromDistance } from '@/lib/distance';
 import { WORLD_ASPECT } from '@/lib/mapBounds';
 import MapPicker from './MapPicker';
@@ -37,7 +37,7 @@ function todayLabel() {
   return new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
-type RoundResult = { correct: boolean; score: number; km: number };
+type RoundResult = { correct: boolean; near: boolean; score: number; km: number };
 
 // Horizontal row of TOTAL_ROUNDS dots that fills with green-check / red-X as
 // each round resolves. The currently-active round is highlighted with a
@@ -66,6 +66,19 @@ function RoundProgress({
                 title={`Round ${i + 1}: correct (${result.score} pts)`}
               >
                 <Check className="w-4 h-4" strokeWidth={3.5} />
+              </div>
+            );
+          }
+          if (result.near) {
+            // Wrong region, but the click landed right next to the correct
+            // one — orange "so close!" dot.
+            return (
+              <div
+                key={i}
+                className="w-7 h-7 rounded-full bg-orange-500 text-white flex items-center justify-center shadow-sm font-bold text-base leading-none"
+                title={`Round ${i + 1}: so close (${result.score} pts)`}
+              >
+                !
               </div>
             );
           }
@@ -117,6 +130,7 @@ const GeoGuessGame: React.FC = () => {
   const [revealLocation, setRevealLocation] = useState(false);
   const [guessedRegion, setGuessedRegion] = useState<number | null>(null);
   const [isCorrectGuess, setIsCorrectGuess] = useState<boolean | null>(null);
+  const [isNearMiss, setIsNearMiss] = useState<boolean | null>(null);
   const [clickedLatLng, setClickedLatLng] = useState<{ lat: number; lng: number } | null>(null);
   const [distanceKm, setDistanceKm] = useState<number | null>(null);
   const [powerups, setPowerups] = useState<PowerupState>(initialPowerups);
@@ -304,9 +318,11 @@ const GeoGuessGame: React.FC = () => {
     const regionIdx = regionForCoord(round, lat, lng);
     const correctIdx = regionForCoord(round, currentLocation.lat, currentLocation.lng);
     const correct = regionIdx === correctIdx;
+    const near = !correct && isNearRegionBorder(round, lat, lng, correctIdx);
 
     setGuessedRegion(regionIdx);
     setIsCorrectGuess(correct);
+    setIsNearMiss(near);
     setClickedLatLng({ lat, lng });
 
     const km = haversineKm(lat, lng, currentLocation.lat, currentLocation.lng);
@@ -317,7 +333,7 @@ const GeoGuessGame: React.FC = () => {
     // the correct/wrong feedback message; the score scales with how close
     // the click was to the actual landmark.
     const roundScore = scoreFromDistance(km);
-    setRoundResults(rr => [...rr, { correct, score: roundScore, km: Math.round(km) }]);
+    setRoundResults(rr => [...rr, { correct, near, score: roundScore, km: Math.round(km) }]);
 
     setTimeout(() => {
       setScore(s => s + roundScore);
@@ -330,6 +346,7 @@ const GeoGuessGame: React.FC = () => {
         setRevealLocation(false);
         setGuessedRegion(null);
         setIsCorrectGuess(null);
+        setIsNearMiss(null);
         setRound(r => r + 1);
       }
     }, 2200);
@@ -344,6 +361,7 @@ const GeoGuessGame: React.FC = () => {
     setRevealLocation(false);
     setGuessedRegion(null);
     setIsCorrectGuess(null);
+    setIsNearMiss(null);
     setClickedLatLng(null);
     setDistanceKm(null);
     setPowerups(initialPowerups);
@@ -507,6 +525,87 @@ const GeoGuessGame: React.FC = () => {
                   gameOver={gameOver}
                 />
 
+                {/* Hint buttons — sit between the round dots and the map so players
+                    actually see them. After any incorrect guess (wrong region or
+                    near-miss) the still-available buttons pulse with a gold halo to
+                    nudge usage. */}
+                {(() => {
+                  // Glow on any incorrect guess while the reveal is on screen.
+                  // Already-used buttons never glow.
+                  const showGlow = revealLocation && isCorrectGuess === false;
+                  const glowIf = (used: boolean) => (showGlow && !used ? ' hint-glow' : '');
+                  const btnBase = 'flex-1 aspect-square max-w-[68px] rounded-xl flex items-center justify-center transition-colors';
+                  return (
+                    <div className="flex flex-col gap-2">
+                      <div className="text-center">
+                        <span className="text-sm font-bold text-gray-700">Hints</span>
+                      </div>
+                      <div className="flex gap-3 justify-between items-center">
+                        <button
+                          className={`${btnBase} ${
+                            powerups.countryName.used
+                              ? 'bg-gray-200 cursor-not-allowed opacity-50'
+                              : 'bg-blue-500 hover:bg-blue-600 shadow-md'
+                          }${glowIf(powerups.countryName.used)}`}
+                          disabled={powerups.countryName.used}
+                          onClick={() => setPowerups(p => ({ ...p, countryName: { active: true, used: true } }))}
+                          title="Country name"
+                        >
+                          <Globe className="w-7 h-7 text-white" strokeWidth={2} />
+                        </button>
+                        <button
+                          className={`${btnBase} ${
+                            powerups.continent.used
+                              ? 'bg-gray-200 cursor-not-allowed opacity-50'
+                              : 'bg-green-500 hover:bg-green-600 shadow-md'
+                          }${glowIf(powerups.continent.used)}`}
+                          disabled={powerups.continent.used}
+                          onClick={() => setPowerups(p => ({ ...p, continent: { active: true, used: true } }))}
+                          title="Continent"
+                        >
+                          <MapIcon className="w-7 h-7 text-white" strokeWidth={2} />
+                        </button>
+                        <button
+                          className={`${btnBase} ${
+                            powerups.capital.used
+                              ? 'bg-gray-200 cursor-not-allowed opacity-50'
+                              : 'bg-purple-500 hover:bg-purple-600 shadow-md'
+                          }${glowIf(powerups.capital.used)}`}
+                          disabled={powerups.capital.used}
+                          onClick={() => setPowerups(p => ({ ...p, capital: { active: true, used: true } }))}
+                          title="Capital"
+                        >
+                          <Building2 className="w-7 h-7 text-white" strokeWidth={2} />
+                        </button>
+                        <button
+                          className={`${btnBase} ${
+                            powerups.language.used
+                              ? 'bg-gray-200 cursor-not-allowed opacity-50'
+                              : 'bg-orange-500 hover:bg-orange-600 shadow-md'
+                          }${glowIf(powerups.language.used)}`}
+                          disabled={powerups.language.used}
+                          onClick={() => setPowerups(p => ({ ...p, language: { active: true, used: true } }))}
+                          title="Language"
+                        >
+                          <Languages className="w-7 h-7 text-white" strokeWidth={2} />
+                        </button>
+                        <button
+                          className={`${btnBase} ${
+                            powerups.flag.used
+                              ? 'bg-gray-200 cursor-not-allowed opacity-50'
+                              : 'bg-red-500 hover:bg-red-600 shadow-md'
+                          }${glowIf(powerups.flag.used)}`}
+                          disabled={powerups.flag.used}
+                          onClick={() => setPowerups(p => ({ ...p, flag: { active: true, used: true } }))}
+                          title="Flag"
+                        >
+                          <Flag className="w-7 h-7 text-white" strokeWidth={2} />
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })()}
+
                 {/* Map. On mobile / tablet it just sits inline at full container
                     width — no hover trickery, since touch devices don't hover and
                     a tiny map is unguessable. On lg+ it keeps the hover-to-enlarge
@@ -522,6 +621,7 @@ const GeoGuessGame: React.FC = () => {
                       click={clickedLatLng}
                       guessedRegion={guessedRegion}
                       isCorrect={isCorrectGuess}
+                      isNearMiss={isNearMiss}
                       reveal={revealLocation}
                       disabled={gameOver || guessedRegion !== null}
                       onGuess={handleMapGuess}
@@ -544,6 +644,7 @@ const GeoGuessGame: React.FC = () => {
                         click={clickedLatLng}
                         guessedRegion={guessedRegion}
                         isCorrect={isCorrectGuess}
+                        isNearMiss={isNearMiss}
                         reveal={revealLocation}
                         disabled={gameOver || guessedRegion !== null}
                         onGuess={handleMapGuess}
@@ -555,75 +656,9 @@ const GeoGuessGame: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Hints */}
-                <div className="flex flex-col gap-3">
-                  <div className="text-center">
-                    <span className="text-sm font-bold text-gray-700">Hints</span>
-                  </div>
-                  <div className="flex gap-2 justify-center">
-                    <button
-                      className={`w-11 h-11 rounded-xl flex items-center justify-center ${
-                        powerups.countryName.used
-                          ? 'bg-gray-200 cursor-not-allowed opacity-50'
-                          : 'bg-blue-500 hover:bg-blue-600 shadow-md'
-                      }`}
-                      disabled={powerups.countryName.used}
-                      onClick={() => setPowerups(p => ({ ...p, countryName: { active: true, used: true } }))}
-                      title="Country name"
-                    >
-                      <Globe className="w-6 h-6 text-white" strokeWidth={2} />
-                    </button>
-                    <button
-                      className={`w-11 h-11 rounded-xl flex items-center justify-center ${
-                        powerups.continent.used
-                          ? 'bg-gray-200 cursor-not-allowed opacity-50'
-                          : 'bg-green-500 hover:bg-green-600 shadow-md'
-                      }`}
-                      disabled={powerups.continent.used}
-                      onClick={() => setPowerups(p => ({ ...p, continent: { active: true, used: true } }))}
-                      title="Continent"
-                    >
-                      <MapIcon className="w-6 h-6 text-white" strokeWidth={2} />
-                    </button>
-                    <button
-                      className={`w-11 h-11 rounded-xl flex items-center justify-center ${
-                        powerups.capital.used
-                          ? 'bg-gray-200 cursor-not-allowed opacity-50'
-                          : 'bg-purple-500 hover:bg-purple-600 shadow-md'
-                      }`}
-                      disabled={powerups.capital.used}
-                      onClick={() => setPowerups(p => ({ ...p, capital: { active: true, used: true } }))}
-                      title="Capital"
-                    >
-                      <Building2 className="w-6 h-6 text-white" strokeWidth={2} />
-                    </button>
-                    <button
-                      className={`w-11 h-11 rounded-xl flex items-center justify-center ${
-                        powerups.language.used
-                          ? 'bg-gray-200 cursor-not-allowed opacity-50'
-                          : 'bg-orange-500 hover:bg-orange-600 shadow-md'
-                      }`}
-                      disabled={powerups.language.used}
-                      onClick={() => setPowerups(p => ({ ...p, language: { active: true, used: true } }))}
-                      title="Language"
-                    >
-                      <Languages className="w-6 h-6 text-white" strokeWidth={2} />
-                    </button>
-                    <button
-                      className={`w-11 h-11 rounded-xl flex items-center justify-center ${
-                        powerups.flag.used
-                          ? 'bg-gray-200 cursor-not-allowed opacity-50'
-                          : 'bg-red-500 hover:bg-red-600 shadow-md'
-                      }`}
-                      disabled={powerups.flag.used}
-                      onClick={() => setPowerups(p => ({ ...p, flag: { active: true, used: true } }))}
-                      title="Flag"
-                    >
-                      <Flag className="w-6 h-6 text-white" strokeWidth={2} />
-                    </button>
-                  </div>
-
-                  {/* Active hint info, stacked vertically below the buttons. */}
+                {/* Active hint info — sits below the map (in the un-hovered map's
+                    flow position) so picking a hint reveals its answer here. */}
+                <div className="flex flex-col gap-2">
                   <div className="flex flex-col gap-1.5">
                     {powerups.countryName.active && currentLocation && (
                       <div className="px-2.5 py-1.5 bg-blue-50 rounded text-xs flex items-center gap-2">
@@ -669,6 +704,8 @@ const GeoGuessGame: React.FC = () => {
               <p className="text-sm mt-3 w-full lg:w-[65%]">
                 {isCorrectGuess ? (
                   <span className="text-green-600 font-semibold">Correct region! </span>
+                ) : isNearMiss ? (
+                  <span className="text-orange-600 font-semibold">So close — just over the border. </span>
                 ) : (
                   <span className="text-red-600 font-semibold">Wrong region. </span>
                 )}

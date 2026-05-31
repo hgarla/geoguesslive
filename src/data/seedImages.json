@@ -700,5 +700,923 @@
       "license": "cc by-sa 2.0",
       "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bali_%E2%80%93_Rice_terrace_(2687339411).jpg"
     }
+  },
+  "Abu Simbel": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Ramsis%2C_Aswan_Governorate%2C_Egypt_-_panoramio.jpg/1920px-Ramsis%2C_Aswan_Governorate%2C_Egypt_-_panoramio.jpg",
+    "attribution": {
+      "artist": "youssef_alam",
+      "license": "cc by 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ramsis,_Aswan_Governorate,_Egypt_-_panoramio.jpg"
+    }
+  },
+  "Karnak Temple": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Temple_de_Louxor_68.jpg/1920px-Temple_de_Louxor_68.jpg",
+    "attribution": {
+      "artist": "René Hourdry",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Temple_de_Louxor_68.jpg"
+    }
+  },
+  "Pyramid of Djoser": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Saqqara_pyramid_ver_2.jpg/1920px-Saqqara_pyramid_ver_2.jpg",
+    "attribution": {
+      "artist": "Charles J. Sharp",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Saqqara_pyramid_ver_2.jpg"
+    }
+  },
+  "Hassan II Mosque": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/16/Casablanca_panorama.jpg",
+    "attribution": {
+      "artist": "Sgroey",
+      "license": "cc by 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Casablanca_panorama.jpg"
+    }
+  },
+  "Chefchaouen": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Chefchaouen_%2852189357475%29.jpg/1920px-Chefchaouen_%2852189357475%29.jpg",
+    "attribution": {
+      "artist": "William John Gauthier from Denmark ([1])",
+      "license": "cc by-sa 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chefchaouen_(52189357475).jpg"
+    }
+  },
+  "Lalibela Rock Churches": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Lalibela%2C_san_giorgio%2C_esterno_24.jpg/1920px-Lalibela%2C_san_giorgio%2C_esterno_24.jpg",
+    "attribution": {
+      "artist": "Sailko",
+      "license": "cc by 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lalibela,_san_giorgio,_esterno_24.jpg"
+    }
+  },
+  "Avenue of the Baobabs": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Adansonia_grandidieri_Pat_Hooper.jpg",
+    "attribution": {
+      "artist": "Pat Hooper from Chicago, IL, USA",
+      "license": "cc by-sa 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Adansonia_grandidieri_Pat_Hooper.jpg"
+    }
+  },
+  "Stone Town, Zanzibar": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/73/Zanzibar_sultan_palace.jpg",
+    "attribution": {
+      "artist": "No machine-readable author provided. Mbz1 assumed (based on copyright claims).",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Zanzibar_sultan_palace.jpg"
+    }
+  },
+  "Sossusvlei": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Sossusvlei.jpg/1920px-Sossusvlei.jpg",
+    "attribution": {
+      "artist": "Ikiwaner",
+      "license": "gfdl 1.2",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sossusvlei.jpg"
+    }
+  },
+  "Great Mosque of Djenné": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Djenne_great_mud_mosque.jpg/1920px-Djenne_great_mud_mosque.jpg",
+    "attribution": {
+      "artist": "Ruud Zwart",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Djenne_great_mud_mosque.jpg"
+    }
+  },
+  "Cape of Good Hope": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Playa_Dias%2C_Cape_Point%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_103.jpg/1920px-Playa_Dias%2C_Cape_Point%2C_Sud%C3%A1frica%2C_2018-07-23%2C_DD_103.jpg",
+    "attribution": {
+      "artist": "Diego Delso",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Playa_Dias,_Cape_Point,_Sud%C3%A1frica,_2018-07-23,_DD_103.jpg"
+    }
+  },
+  "Borobudur": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Pradaksina.jpg/1920px-Pradaksina.jpg",
+    "attribution": {
+      "artist": "Heri nugroho",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pradaksina.jpg"
+    }
+  },
+  "Mount Bromo": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Bromo-Semeru-Batok-Widodaren.jpg",
+    "attribution": {
+      "artist": "Riza Nugraha ? from Utrecht, The Netherlands",
+      "license": "cc by 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bromo-Semeru-Batok-Widodaren.jpg"
+    }
+  },
+  "Tanah Lot": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/TanahLot_2014.JPG/1920px-TanahLot_2014.JPG",
+    "attribution": {
+      "artist": "Grayswoodsurrey",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:TanahLot_2014.JPG"
+    }
+  },
+  "Himeji Castle": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Himeji_castle_in_may_2015.jpg/1920px-Himeji_castle_in_may_2015.jpg",
+    "attribution": {
+      "artist": "Nikos Kitsakis",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Himeji_castle_in_may_2015.jpg"
+    }
+  },
+  "Kinkaku-ji": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Golden_Pavilion_Kinkaku-ji_water_mirror_2024.jpg/1920px-Golden_Pavilion_Kinkaku-ji_water_mirror_2024.jpg",
+    "attribution": {
+      "artist": "Nacaru",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Golden_Pavilion_Kinkaku-ji_water_mirror_2024.jpg"
+    }
+  },
+  "Itsukushima Shrine": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Itsukushima_Shrine_Torii_Gate_%2813890465459%29.jpg/1920px-Itsukushima_Shrine_Torii_Gate_%2813890465459%29.jpg",
+    "attribution": {
+      "artist": "redlegsfan21",
+      "license": "cc by-sa 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Itsukushima_Shrine_Torii_Gate_(13890465459).jpg"
+    }
+  },
+  "Tokyo Tower": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Tokyo_Tower_2023.jpg/1920px-Tokyo_Tower_2023.jpg",
+    "attribution": {
+      "artist": "Akonnchiroll",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tokyo_Tower_2023.jpg"
+    }
+  },
+  "Gyeongbokgung Palace": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/20241114_changing.jpg/1920px-20241114_changing.jpg",
+    "attribution": {
+      "artist": "Wombatjpw",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:20241114_changing.jpg"
+    }
+  },
+  "N Seoul Tower": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/City_of_Seoul_View_From_N_Seoul_Tower.JPG/1920px-City_of_Seoul_View_From_N_Seoul_Tower.JPG",
+    "attribution": {
+      "artist": "Penmerahpenbiru",
+      "license": "cc by 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:City_of_Seoul_View_From_N_Seoul_Tower.JPG"
+    }
+  },
+  "Lotus Temple": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/LotusDelhi.jpg",
+    "attribution": {
+      "artist": "Vandelizer",
+      "license": "cc by 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:LotusDelhi.jpg"
+    }
+  },
+  "Hawa Mahal": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/East_facade_Hawa_Mahal_Jaipur_from_ground_level_%28July_2022%29_-_img_01.jpg/1920px-East_facade_Hawa_Mahal_Jaipur_from_ground_level_%28July_2022%29_-_img_01.jpg",
+    "attribution": {
+      "artist": "Chainwit.",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:East_facade_Hawa_Mahal_Jaipur_from_ground_level_(July_2022)_-_img_01.jpg"
+    }
+  },
+  "Golden Temple": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/The_Golden_Temple_of_Amrithsar_7.jpg/1920px-The_Golden_Temple_of_Amrithsar_7.jpg",
+    "attribution": {
+      "artist": "Shagil Kannur",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Golden_Temple_of_Amrithsar_7.jpg"
+    }
+  },
+  "Gateway of India": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Mumbai_03-2016_30_Gateway_of_India.jpg/1920px-Mumbai_03-2016_30_Gateway_of_India.jpg",
+    "attribution": {
+      "artist": "A.Savin",
+      "license": "fal",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mumbai_03-2016_30_Gateway_of_India.jpg"
+    }
+  },
+  "Sigiriya": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Sigiriya_%28141688197%29.jpeg/1920px-Sigiriya_%28141688197%29.jpeg",
+    "attribution": {
+      "artist": "Wrobell",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sigiriya_(141688197).jpeg"
+    }
+  },
+  "Shwedagon Pagoda": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Shwedagon_Pagoda_2017.jpg/1920px-Shwedagon_Pagoda_2017.jpg",
+    "attribution": {
+      "artist": "Bjørn Christian Tørrissen",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shwedagon_Pagoda_2017.jpg"
+    }
+  },
+  "Paro Taktsang": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Paro_Taktsang%2C_Bhutan_%28edited%29.jpg/1920px-Paro_Taktsang%2C_Bhutan_%28edited%29.jpg",
+    "attribution": {
+      "artist": "Original: Nina R from Africa Derivative work: UnpetitproleX",
+      "license": "cc by 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Paro_Taktsang,_Bhutan_(edited).jpg"
+    }
+  },
+  "Mount Everest": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Mt._Everest_from_Gokyo_Ri_November_5%2C_2012.jpg/1920px-Mt._Everest_from_Gokyo_Ri_November_5%2C_2012.jpg",
+    "attribution": {
+      "artist": "Rdevany",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mt._Everest_from_Gokyo_Ri_November_5,_2012.jpg"
+    }
+  },
+  "Wat Arun": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/%E0%B9%80%E0%B8%88%E0%B8%94%E0%B8%B5%E0%B8%A2%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%98%E0%B8%B2%E0%B8%99%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%9B%E0%B8%A3%E0%B8%B2%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%AD%E0%B8%A3%E0%B8%B8%E0%B8%932.jpg/1920px-%E0%B9%80%E0%B8%88%E0%B8%94%E0%B8%B5%E0%B8%A2%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%98%E0%B8%B2%E0%B8%99%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%9B%E0%B8%A3%E0%B8%B2%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%AD%E0%B8%A3%E0%B8%B8%E0%B8%932.jpg",
+    "attribution": {
+      "artist": "Mastertongapollo",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:%E0%B9%80%E0%B8%88%E0%B8%94%E0%B8%B5%E0%B8%A2%E0%B9%8C%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%98%E0%B8%B2%E0%B8%99%E0%B8%97%E0%B8%A3%E0%B8%87%E0%B8%9B%E0%B8%A3%E0%B8%B2%E0%B8%87%E0%B8%84%E0%B9%8C%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%AD%E0%B8%A3%E0%B8%B8%E0%B8%932.jpg"
+    }
+  },
+  "Grand Palace Bangkok": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/0005574_-_Wat_Phra_Kaew_006.jpg/1920px-0005574_-_Wat_Phra_Kaew_006.jpg",
+    "attribution": {
+      "artist": "Preecha.MJ",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:0005574_-_Wat_Phra_Kaew_006.jpg"
+    }
+  },
+  "Wat Rong Khun": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Wat_Rong_Khun_-_Chiang_Rai.jpg/1920px-Wat_Rong_Khun_-_Chiang_Rai.jpg",
+    "attribution": {
+      "artist": "JJ Harrison (https://www.jjharrison.com.au/)",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Wat_Rong_Khun_-_Chiang_Rai.jpg"
+    }
+  },
+  "Banaue Rice Terraces": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Banaue-terrace.JPG/1920px-Banaue-terrace.JPG",
+    "attribution": {
+      "artist": "User: (WT-shared) Roundtheworld at wts wikivoyage",
+      "license": "public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Banaue-terrace.JPG"
+    }
+  },
+  "Chocolate Hills": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/af/Chocolate_Hills_Bohol.JPG",
+    "attribution": {
+      "artist": "P199",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Chocolate_Hills_Bohol.JPG"
+    }
+  },
+  "Terracotta Army": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/51714-Terracota-Army.jpg/1920px-51714-Terracota-Army.jpg",
+    "attribution": {
+      "artist": "xiquinhosilva",
+      "license": "cc by 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:51714-Terracota-Army.jpg"
+    }
+  },
+  "Potala Palace": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Potala_Palace_HQ.jpg",
+    "attribution": {
+      "artist": "Lhasa Government",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Potala_Palace_HQ.jpg"
+    }
+  },
+  "The Bund": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Bund_at_night.jpg/1920px-Bund_at_night.jpg",
+    "attribution": {
+      "artist": "Mr. Tickle",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bund_at_night.jpg"
+    }
+  },
+  "Wadi Rum": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Mountain_in_Wadi_Rum%2C_Jordan.jpg/1920px-Mountain_in_Wadi_Rum%2C_Jordan.jpg",
+    "attribution": {
+      "artist": "Daniel Case",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mountain_in_Wadi_Rum,_Jordan.jpg"
+    }
+  },
+  "Blue Mosque": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Istanbul_%2834223582516%29_%28cropped%29.jpg/1920px-Istanbul_%2834223582516%29_%28cropped%29.jpg",
+    "attribution": {
+      "artist": "Pedro Szekely from Los Angeles, USA",
+      "license": "cc by-sa 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Istanbul_(34223582516)_(cropped).jpg"
+    }
+  },
+  "Galata Tower": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Galata_tower_01_23.jpg/1920px-Galata_tower_01_23.jpg",
+    "attribution": {
+      "artist": "GrandEscogriffe",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Galata_tower_01_23.jpg"
+    }
+  },
+  "Trevi Fountain": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Trevi_Fountain_-_Roma.jpg/1920px-Trevi_Fountain_-_Roma.jpg",
+    "attribution": {
+      "artist": "NikonZ7II",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Trevi_Fountain_-_Roma.jpg"
+    }
+  },
+  "Pantheon, Rome": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Pantheon_%28Rome%29_-_Right_side_and_front.jpg/1920px-Pantheon_%28Rome%29_-_Right_side_and_front.jpg",
+    "attribution": {
+      "artist": "NikonZ7II",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pantheon_(Rome)_-_Right_side_and_front.jpg"
+    }
+  },
+  "Cinque Terre": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Cinque_Terre_%28Italy%2C_October_2020%29_-_24_%2850543603956%29.jpg/1920px-Cinque_Terre_%28Italy%2C_October_2020%29_-_24_%2850543603956%29.jpg",
+    "attribution": {
+      "artist": "Bruno Rijsman",
+      "license": "cc by-sa 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cinque_Terre_(Italy,_October_2020)_-_24_(50543603956).jpg"
+    }
+  },
+  "Pompeii": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Theathres_of_Pompeii.jpg/1920px-Theathres_of_Pompeii.jpg",
+    "attribution": {
+      "artist": "ElfQrin",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Theathres_of_Pompeii.jpg"
+    }
+  },
+  "Amalfi Coast": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Amalfi_Coast_%28Italy%2C_October_2020%29_-_75_%2850558355441%29.jpg/1920px-Amalfi_Coast_%28Italy%2C_October_2020%29_-_75_%2850558355441%29.jpg",
+    "attribution": {
+      "artist": "Bruno Rijsman",
+      "license": "cc by-sa 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Amalfi_Coast_(Italy,_October_2020)_-_75_(50558355441).jpg"
+    }
+  },
+  "Mount Etna": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Mt_Etna_and_Catania1.jpg/1920px-Mt_Etna_and_Catania1.jpg",
+    "attribution": {
+      "artist": "BenAveling",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mt_Etna_and_Catania1.jpg"
+    }
+  },
+  "Notre-Dame de Paris": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Notre-Dame_de_Paris%2C_4_October_2017.jpg/1920px-Notre-Dame_de_Paris%2C_4_October_2017.jpg",
+    "attribution": {
+      "artist": "Ali Sabbagh",
+      "license": "cc0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Notre-Dame_de_Paris,_4_October_2017.jpg"
+    }
+  },
+  "Palace of Versailles": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Versailles-Chateau-Jardins02.jpg/1920px-Versailles-Chateau-Jardins02.jpg",
+    "attribution": {
+      "artist": "G CHP",
+      "license": "cc by-sa 2.5",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Versailles-Chateau-Jardins02.jpg"
+    }
+  },
+  "Arc de Triomphe": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Arc_de_Triomphe%2C_Paris_21_October_2010.jpg/1920px-Arc_de_Triomphe%2C_Paris_21_October_2010.jpg",
+    "attribution": {
+      "artist": "Jiuguang Wang",
+      "license": "cc by-sa 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arc_de_Triomphe,_Paris_21_October_2010.jpg"
+    }
+  },
+  "Mont Blanc": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Mont_Blanc_Aiguille.jpg",
+    "attribution": {
+      "artist": "Hseugut",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mont_Blanc_Aiguille.jpg"
+    }
+  },
+  "Alhambra": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Dawn_Charles_V_Palace_Alhambra_Granada_Andalusia_Spain.jpg/1920px-Dawn_Charles_V_Palace_Alhambra_Granada_Andalusia_Spain.jpg",
+    "attribution": {
+      "artist": "Jebulon",
+      "license": "cc0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dawn_Charles_V_Palace_Alhambra_Granada_Andalusia_Spain.jpg"
+    }
+  },
+  "Park Güell": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Parc_guell_-_panoramio.jpg/1920px-Parc_guell_-_panoramio.jpg",
+    "attribution": {
+      "artist": "essetefano",
+      "license": "cc by 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Parc_guell_-_panoramio.jpg"
+    }
+  },
+  "Belém Tower": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Torre_Bel%C3%A9m_April_2009-4a.jpg/1920px-Torre_Bel%C3%A9m_April_2009-4a.jpg",
+    "attribution": {
+      "artist": "Alvesgaspar",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Torre_Bel%C3%A9m_April_2009-4a.jpg"
+    }
+  },
+  "Douro Valley": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/DouroVallei105923_2012.jpg/1920px-DouroVallei105923_2012.jpg",
+    "attribution": {
+      "artist": "Original uploader was Bernard bill5 at nl.wikipedia Later version(s) were uploaded by Kameraad Pjotr at nl.wikipedia. (Original text : Bruno Rodrigues)",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:DouroVallei105923_2012.jpg"
+    }
+  },
+  "Cologne Cathedral": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/K%C3%B6lner_Dom_-_Westfassade_2022_ohne_Ger%C3%BCst-0968_b.jpg/1920px-K%C3%B6lner_Dom_-_Westfassade_2022_ohne_Ger%C3%BCst-0968_b.jpg",
+    "attribution": {
+      "artist": "Raimond Spekking",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:K%C3%B6lner_Dom_-_Westfassade_2022_ohne_Ger%C3%BCst-0968_b.jpg"
+    }
+  },
+  "Heidelberg Castle": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Heidelberg-2726936.jpg/1920px-Heidelberg-2726936.jpg",
+    "attribution": {
+      "artist": "Motatcho",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Heidelberg-2726936.jpg"
+    }
+  },
+  "Belvedere Palace": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Palacio_Belvedere%2C_Viena%2C_Austria%2C_2020-02-01%2C_DD_93-95_HDR.jpg/1920px-Palacio_Belvedere%2C_Viena%2C_Austria%2C_2020-02-01%2C_DD_93-95_HDR.jpg",
+    "attribution": {
+      "artist": "Diego Delso",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Palacio_Belvedere,_Viena,_Austria,_2020-02-01,_DD_93-95_HDR.jpg"
+    }
+  },
+  "Matterhorn": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/6/60/Matterhorn_from_Domh%C3%BCtte_-_2.jpg",
+    "attribution": {
+      "artist": "Photo: chil, on Camptocamp.org Derivative work:Zacharie Grossen",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Matterhorn_from_Domh%C3%BCtte_-_2.jpg"
+    }
+  },
+  "Jungfraujoch": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Sphinx_et_Jungfrau_-_img_06980.jpg/1920px-Sphinx_et_Jungfrau_-_img_06980.jpg",
+    "attribution": {
+      "artist": "Pmau",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sphinx_et_Jungfrau_-_img_06980.jpg"
+    }
+  },
+  "Chillon Castle": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/001_Chateau_de_Chillon_and_Dents_du_Midi_Photo_by_Giles_Laurent.jpg/1920px-001_Chateau_de_Chillon_and_Dents_du_Midi_Photo_by_Giles_Laurent.jpg",
+    "attribution": {
+      "artist": "Giles Laurent",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:001_Chateau_de_Chillon_and_Dents_du_Midi_Photo_by_Giles_Laurent.jpg"
+    }
+  },
+  "Kinderdijk Windmills": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/KinderdijkMolens02.jpg",
+    "attribution": {
+      "artist": "Lucas Hirschegger",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:KinderdijkMolens02.jpg"
+    }
+  },
+  "Rijksmuseum": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/South_facade_of_the_Rijksmuseum_Amsterdam_%28DSCF0528%29.jpg/1920px-South_facade_of_the_Rijksmuseum_Amsterdam_%28DSCF0528%29.jpg",
+    "attribution": {
+      "artist": "Trougnouf (Benoit Brummer)",
+      "license": "cc by 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:South_facade_of_the_Rijksmuseum_Amsterdam_(DSCF0528).jpg"
+    }
+  },
+  "Grand-Place, Brussels": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Grand-Place%2C_Brussels_-_panorama%2C_June_2018.jpg/1920px-Grand-Place%2C_Brussels_-_panorama%2C_June_2018.jpg",
+    "attribution": {
+      "artist": "Celuici",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Grand-Place,_Brussels_-_panorama,_June_2018.jpg"
+    }
+  },
+  "Bruges Old Town": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Br%C3%BCgge_Blick_vom_Belfried_4.jpg/1920px-Br%C3%BCgge_Blick_vom_Belfried_4.jpg",
+    "attribution": {
+      "artist": "Zairon",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Br%C3%BCgge_Blick_vom_Belfried_4.jpg"
+    }
+  },
+  "Cliffs of Moher": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Cliffs-Of-Moher-OBriens-From-South.JPG/1920px-Cliffs-Of-Moher-OBriens-From-South.JPG",
+    "attribution": {
+      "artist": "Bjørn Christian Tørrissen",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cliffs-Of-Moher-OBriens-From-South.JPG"
+    }
+  },
+  "Trinity College Dublin": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/The_entrance_of_the_historic_Trinity_College_%28Unsplash%29.jpg/1920px-The_entrance_of_the_historic_Trinity_College_%28Unsplash%29.jpg",
+    "attribution": {
+      "artist": "Stephen Bergin steve_",
+      "license": "cc0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_entrance_of_the_historic_Trinity_College_(Unsplash).jpg"
+    }
+  },
+  "Giant's Causeway": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Causeway-code_poet-4.jpg/1920px-Causeway-code_poet-4.jpg",
+    "attribution": {
+      "artist": "code poet on flickr.",
+      "license": "cc by-sa 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Causeway-code_poet-4.jpg"
+    }
+  },
+  "Tower of London": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Tower_of_London_from_the_Shard_%288515883950%29.jpg/1920px-Tower_of_London_from_the_Shard_%288515883950%29.jpg",
+    "attribution": {
+      "artist": "[Duncan] from Nottingham, UK",
+      "license": "cc by 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tower_of_London_from_the_Shard_(8515883950).jpg"
+    }
+  },
+  "Geirangerfjord": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Geirangerfjord_.jpg/1920px-Geirangerfjord_.jpg",
+    "attribution": {
+      "artist": "Andreas Trepte",
+      "license": "cc by-sa 2.5",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Geirangerfjord_.jpg"
+    }
+  },
+  "Bryggen": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Bryggen%2C_Bergen%2C_Noruega%2C_2019-09-08%2C_DD_115-117_PAN.jpg/1920px-Bryggen%2C_Bergen%2C_Noruega%2C_2019-09-08%2C_DD_115-117_PAN.jpg",
+    "attribution": {
+      "artist": "Diego Delso",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bryggen,_Bergen,_Noruega,_2019-09-08,_DD_115-117_PAN.jpg"
+    }
+  },
+  "Hallgrímskirkja": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Hallgrimskirkja_mai_2026.jpg",
+    "attribution": {
+      "artist": "Steinninn",
+      "license": "cc by 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hallgrimskirkja_mai_2026.jpg"
+    }
+  },
+  "Jökulsárlón": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/J%C3%B6kuls%C3%A1rl%C3%B3n_lagoon_in_southeastern_Iceland.jpg/1920px-J%C3%B6kuls%C3%A1rl%C3%B3n_lagoon_in_southeastern_Iceland.jpg",
+    "attribution": {
+      "artist": "Molechaser",
+      "license": "cc by-sa 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_lagoon_in_southeastern_Iceland.jpg"
+    }
+  },
+  "Nyhavn": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/The_Nyhavn_Canal_3.jpg/1920px-The_Nyhavn_Canal_3.jpg",
+    "attribution": {
+      "artist": "European Commission",
+      "license": "cc by 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Nyhavn_Canal_3.jpg"
+    }
+  },
+  "Stockholm City Hall": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Stockholms_Stadshuset_City_Hall_Stockholm_2016_01.jpg/1920px-Stockholms_Stadshuset_City_Hall_Stockholm_2016_01.jpg",
+    "attribution": {
+      "artist": "Julian Herzog (Website)",
+      "license": "cc by 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stockholms_Stadshuset_City_Hall_Stockholm_2016_01.jpg"
+    }
+  },
+  "Suomenlinna": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/a/af/Suomenlinna_aerial.JPG",
+    "attribution": {
+      "artist": "Migro",
+      "license": "public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Suomenlinna_aerial.JPG"
+    }
+  },
+  "Mykonos": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/2011_Dimos_Mykonou.png/1920px-2011_Dimos_Mykonou.png",
+    "attribution": {
+      "artist": "Pitichinaccio",
+      "license": "cc by 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2011_Dimos_Mykonou.png"
+    }
+  },
+  "Diocletian's Palace": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Croatia-01239_-_The_Peristil_%289551533404%29.jpg/1920px-Croatia-01239_-_The_Peristil_%289551533404%29.jpg",
+    "attribution": {
+      "artist": "Dennis G. Jarvis",
+      "license": "cc by-sa 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Croatia-01239_-_The_Peristil_(9551533404).jpg"
+    }
+  },
+  "Hermitage Museum": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/5174-3._St._Petersburg._Greater_Hermitage.jpg/1920px-5174-3._St._Petersburg._Greater_Hermitage.jpg",
+    "attribution": {
+      "artist": "GAlexandrova",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:5174-3._St._Petersburg._Greater_Hermitage.jpg"
+    }
+  },
+  "Peterhof Palace": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Peterhof_Palace%2C_Saint_Petersburg%2C_Russia_%2844408938295%29.jpg/1920px-Peterhof_Palace%2C_Saint_Petersburg%2C_Russia_%2844408938295%29.jpg",
+    "attribution": {
+      "artist": "Ninara from Helsinki, Finland",
+      "license": "cc by 2.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Peterhof_Palace,_Saint_Petersburg,_Russia_(44408938295).jpg"
+    }
+  },
+  "Hollywood Sign": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Hollywood_Sign_%28Zuschnitt%29.jpg/1920px-Hollywood_Sign_%28Zuschnitt%29.jpg",
+    "attribution": {
+      "artist": "Thomas Wolf, www.foto-tw.de",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hollywood_Sign_(Zuschnitt).jpg"
+    }
+  },
+  "White House": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/White_House_north_and_south_sides.jpg/1920px-White_House_north_and_south_sides.jpg",
+    "attribution": {
+      "artist": "(top)Cezary p(bottom)MattWade",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:White_House_north_and_south_sides.jpg"
+    }
+  },
+  "Empire State Building": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Empire_State_Building_%28aerial_view%29.jpg",
+    "attribution": {
+      "artist": "Sam Valadi",
+      "license": "public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Empire_State_Building_(aerial_view).jpg"
+    }
+  },
+  "Brooklyn Bridge": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Brooklyn_Bridge_Manhattan.jpg/1920px-Brooklyn_Bridge_Manhattan.jpg",
+    "attribution": {
+      "artist": "Suiseiseki",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brooklyn_Bridge_Manhattan.jpg"
+    }
+  },
+  "Yellowstone National Park": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Abronia_ammophila.jpg/1920px-Abronia_ammophila.jpg",
+    "attribution": {
+      "artist": "National Park Service",
+      "license": "public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Abronia_ammophila.jpg"
+    }
+  },
+  "Yosemite Valley": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Tunnel_View%2C_Yosemite_Valley%2C_Yosemite_NP_-_Diliff.jpg/1920px-Tunnel_View%2C_Yosemite_Valley%2C_Yosemite_NP_-_Diliff.jpg",
+    "attribution": {
+      "artist": "Diliff",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tunnel_View,_Yosemite_Valley,_Yosemite_NP_-_Diliff.jpg"
+    }
+  },
+  "Antelope Canyon": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/USA_Antelope-Canyon.jpg",
+    "attribution": {
+      "artist": "Lucas Löffler",
+      "license": "public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:USA_Antelope-Canyon.jpg"
+    }
+  },
+  "Space Needle": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Space_Needle_2011-07-04.jpg/1920px-Space_Needle_2011-07-04.jpg",
+    "attribution": {
+      "artist": "Jordon Kalilich",
+      "license": "public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Space_Needle_2011-07-04.jpg"
+    }
+  },
+  "Old Quebec": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Le_tourisme_dans_le_vieux_Qu%C3%A9bec.jpg/1920px-Le_tourisme_dans_le_vieux_Qu%C3%A9bec.jpg",
+    "attribution": {
+      "artist": "Xavier Fournier-Blais",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Le_tourisme_dans_le_vieux_Qu%C3%A9bec.jpg"
+    }
+  },
+  "Old Havana": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Havana_Map_-_Habana_Vieja.png",
+    "attribution": {
+      "artist": "Dэя-Бøяg",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Havana_Map_-_Habana_Vieja.png"
+    }
+  },
+  "Sugarloaf Mountain": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/P%C3%A3o_de_A%C3%A7ucar_-_Sugarloaf_Mountain_-_Zuckerhut_-_2022.jpg/1920px-P%C3%A3o_de_A%C3%A7ucar_-_Sugarloaf_Mountain_-_Zuckerhut_-_2022.jpg",
+    "attribution": {
+      "artist": "Arne Müseler",
+      "license": "cc by-sa 3.0 de",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:P%C3%A3o_de_A%C3%A7ucar_-_Sugarloaf_Mountain_-_Zuckerhut_-_2022.jpg"
+    }
+  },
+  "Atacama Desert": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/ALMA_and_the_centre_of_the_Milky_Way.jpg/1920px-ALMA_and_the_centre_of_the_Milky_Way.jpg",
+    "attribution": {
+      "artist": "ESO/B. Tafreshi (twanight.org)",
+      "license": "cc by 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:ALMA_and_the_centre_of_the_Milky_Way.jpg"
+    }
+  },
+  "Perito Moreno Glacier": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Perito_Moreno_Glacier_2023.jpg/1920px-Perito_Moreno_Glacier_2023.jpg",
+    "attribution": {
+      "artist": "Fernando",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Perito_Moreno_Glacier_2023.jpg"
+    }
+  },
+  "Cartagena Old Town": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Museo_Naval_del_Caribe.JPG/1920px-Museo_Naval_del_Caribe.JPG",
+    "attribution": {
+      "artist": "Sgonzalezb",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Museo_Naval_del_Caribe.JPG"
+    }
+  },
+  "Rainbow Mountain": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Monta%C3%B1aarcoirisperuabanto.jpg/1920px-Monta%C3%B1aarcoirisperuabanto.jpg",
+    "attribution": {
+      "artist": "Diego Aldrin Abanto Ricce",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Monta%C3%B1aarcoirisperuabanto.jpg"
+    }
+  },
+  "Lake Titicaca": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Alpaca_y_la_isla_Challeca.jpg/1920px-Alpaca_y_la_isla_Challeca.jpg",
+    "attribution": {
+      "artist": "EEJCC",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alpaca_y_la_isla_Challeca.jpg"
+    }
+  },
+  "Great Barrier Reef": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/ISS-45_StoryOfWater%2C_Great_Barrier_Reef%2C_Australia.jpg",
+    "attribution": {
+      "artist": "NASA/Kjell Lindgren",
+      "license": "public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:ISS-45_StoryOfWater,_Great_Barrier_Reef,_Australia.jpg"
+    }
+  },
+  "Sydney Harbour Bridge": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Sydney_Harbour_Bridge-16_October_2025.jpg/1920px-Sydney_Harbour_Bridge-16_October_2025.jpg",
+    "attribution": {
+      "artist": "Servite et contribuere",
+      "license": "cc0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sydney_Harbour_Bridge-16_October_2025.jpg"
+    }
+  },
+  "Twelve Apostles": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/The_Twelve_Apostles_2011.jpg/1920px-The_Twelve_Apostles_2011.jpg",
+    "attribution": {
+      "artist": "Michael J Fromholtz",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:The_Twelve_Apostles_2011.jpg"
+    }
+  },
+  "Hobbiton Movie Set": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Waterhouse_Lake_Front.jpg/1920px-Waterhouse_Lake_Front.jpg",
+    "attribution": {
+      "artist": "Harsh.gavhane",
+      "license": "cc by-sa 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Waterhouse_Lake_Front.jpg"
+    }
+  },
+  "Aoraki / Mount Cook": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Mt_Cook_LC0247.jpg/1920px-Mt_Cook_LC0247.jpg",
+    "attribution": {
+      "artist": "Jörg Hempel",
+      "license": "cc by-sa 3.0 de",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mt_Cook_LC0247.jpg"
+    }
+  },
+  "Lake Louise": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Lake_Louise_17092005.jpg",
+    "attribution": {
+      "artist": "Gorgo",
+      "license": "public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lake_Louise_17092005.jpg"
+    }
+  },
+  "Tulum": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Tulum_2.jpg/1920px-Tulum_2.jpg",
+    "attribution": {
+      "artist": "Popo le Chien",
+      "license": "cc by-sa 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tulum_2.jpg"
+    }
+  },
+  "Louvre Abu Dhabi": {
+    "source": "wikimedia",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/14/%27The_Tower_of_Babel%27_by_Abel_Grimmer%2C_1595.jpg",
+    "attribution": {
+      "artist": "Abel Grimmer",
+      "license": "public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:%27The_Tower_of_Babel%27_by_Abel_Grimmer,_1595.jpg"
+    }
   }
 }

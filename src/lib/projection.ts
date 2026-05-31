@@ -48,3 +48,32 @@ export function regionForCoord(round: number, lat: number, lng: number): number 
   const row = Math.min(cfg.rows - 1, Math.max(0, Math.floor(latFrac * cfg.rows)));
   return row * cfg.cols + col;
 }
+
+// True when the click is in a different region than the correct one but lies
+// within `threshold` × min(cellW, cellH) viewBox units of the correct region's
+// nearest edge. Used to flag "so close!" guesses with a distinct color.
+export function isNearRegionBorder(
+  round: number,
+  lat: number,
+  lng: number,
+  correctRegionIdx: number,
+  threshold = 0.25,
+): boolean {
+  const cfg = roundConfigs[round];
+  if (!cfg) return false;
+  const cellW = MAP_VIEWBOX.width / cfg.cols;
+  const cellH = MAP_CROP_HEIGHT / cfg.rows;
+  const row = Math.floor(correctRegionIdx / cfg.cols);
+  const col = correctRegionIdx % cfg.cols;
+  const rectX = col * cellW;
+  const rectY = MAP_CROP_TOP + row * cellH;
+  const rectX2 = rectX + cellW;
+  const rectY2 = rectY + cellH;
+  const { x, y } = geoToPixel(lat, lng);
+  // Distance from point to rectangle (0 if inside).
+  const dx = Math.max(rectX - x, 0, x - rectX2);
+  const dy = Math.max(rectY - y, 0, y - rectY2);
+  const dist = Math.hypot(dx, dy);
+  if (dist === 0) return false; // inside correct region — that's "correct", not "near"
+  return dist <= Math.min(cellW, cellH) * threshold;
+}

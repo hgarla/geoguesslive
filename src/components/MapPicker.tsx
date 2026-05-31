@@ -20,10 +20,17 @@ interface MapPickerProps {
   click?: { lat: number; lng: number } | null;
   guessedRegion?: number | null;
   isCorrect?: boolean | null;
+  // True when the guess was wrong but landed within a hair of the correct
+  // region's border. Drives the orange "so close!" coloring on the region
+  // tint and on the guess marker.
+  isNearMiss?: boolean | null;
   reveal?: boolean;
   disabled?: boolean;
   onGuess: (lat: number, lng: number) => void;
 }
+
+const NEAR_FILL = 'rgba(249,115,22,0.32)'; // orange-500 @ ~32%
+const NEAR_STROKE = '#f97316';
 
 export default function MapPicker({
   round,
@@ -31,6 +38,7 @@ export default function MapPicker({
   click,
   guessedRegion,
   isCorrect,
+  isNearMiss,
   reveal,
   disabled,
   onGuess,
@@ -148,7 +156,11 @@ export default function MapPicker({
           const isHovered = !disabled && hoveredIdx === cell.idx;
           let fill = 'transparent';
           if (isGuessed) {
-            fill = isCorrect ? 'rgba(34,197,94,0.30)' : 'rgba(239,68,68,0.30)';
+            fill = isCorrect
+              ? 'rgba(34,197,94,0.30)'
+              : isNearMiss
+                ? NEAR_FILL
+                : 'rgba(239,68,68,0.30)';
           } else if (isHovered) {
             fill = 'rgba(59,130,246,0.20)';
           }
@@ -201,7 +213,7 @@ export default function MapPicker({
               cx={p.x}
               cy={p.y}
               r={5}
-              fill={isCorrect ? '#22c55e' : '#ef4444'}
+              fill={isCorrect ? '#22c55e' : isNearMiss ? NEAR_STROKE : '#ef4444'}
               stroke="white"
               strokeWidth={1.8}
               pointerEvents="none"
