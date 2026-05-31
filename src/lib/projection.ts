@@ -5,6 +5,7 @@
 // (lat SOUTH_LIMIT). Cells, grid lines, and labels are placed inside that strip.
 
 import { NORTH_LIMIT, SOUTH_LIMIT, WORLD_LAT_SPAN } from './mapBounds';
+import { haversineKm } from './distance';
 
 export const MAP_VIEWBOX = { width: 800, height: 400 } as const;
 
@@ -49,31 +50,46 @@ export function regionForCoord(round: number, lat: number, lng: number): number 
   return row * cfg.cols + col;
 }
 
-// True when the click is in a different region than the correct one but lies
-// within `threshold` × min(cellW, cellH) viewBox units of the correct region's
-// nearest edge. Used to flag "so close!" guesses with a distinct color.
-export function isNearRegionBorder(
+// True iff (a) the correct landmark sits within ~50 mi (`thresholdKm`) of the
+// nearest edge of its own region cell — i.e. close enough that landing in a
+// neighboring region is genuinely a "just over the border" mistake — AND (b)
+// the player's guess landed in a region 8-connected-adjacent (including
+// diagonals) to the correct one.
+//
+// This stops the orange "so close!" feedback from firing when the landmark
+// sits comfortably mid-region but the player happened to click the next
+// region over.
+export function isNearMissGuess(
   round: number,
-  lat: number,
-  lng: number,
+  correctLat: number,
+  correctLng: number,
   correctRegionIdx: number,
-  threshold = 0.25,
+  guessedRegionIdx: number,
+  thresholdKm = 80, // ≈ 50 miles
 ): boolean {
+  if (correctRegionIdx === guessedRegionIdx) return false;
   const cfg = roundConfigs[round];
   if (!cfg) return false;
-  const cellW = MAP_VIEWBOX.width / cfg.cols;
-  const cellH = MAP_CROP_HEIGHT / cfg.rows;
-  const row = Math.floor(correctRegionIdx / cfg.cols);
-  const col = correctRegionIdx % cfg.cols;
-  const rectX = col * cellW;
-  const rectY = MAP_CROP_TOP + row * cellH;
-  const rectX2 = rectX + cellW;
-  const rectY2 = rectY + cellH;
-  const { x, y } = geoToPixel(lat, lng);
-  // Distance from point to rectangle (0 if inside).
-  const dx = Math.max(rectX - x, 0, x - rectX2);
-  const dy = Math.max(rectY - y, 0, y - rectY2);
-  const dist = Math.hypot(dx, dy);
-  if (dist === 0) return false; // inside correct region — that's "correct", not "near"
-  return dist <= Math.min(cellW, cellH) * threshold;
+
+  // (b) Adjacency check first — cheap, rejects most non-near cases.
+  const cRow = Math.floor(correctRegionIdx / cfg.cols);
+  const cCol = correctRegionIdx % cfg.cols;
+  const gRow = Math.floor(guessedRegionIdx / cfg.cols);
+  const gCol = guessedRegionIdx % cfg.cols;
+  const adjacent = Math.abs(cRow - gRow) <= 1 && Math.abs(cCol - gCol) <= 1;
+  if (!adjacent) return false;
+
+  // (a) Ground-km distance from the correct landmark to each of its region's
+  // four edges. We use haversine (not pixel distance) so the threshold is a
+  // real-world distance regardless of latitude or cell pixel size.
+  const topLat = NORTH_LIMIT - (cRow / cfg.rows) * WORLD_LAT_SPAN;
+  const bottomLat = NORTH_LIMIT - ((cRow + 1) / cfg.rows) * WORLD_LAT_SPAN;
+  const leftLng = -180 + (cCol / cfg.cols) * 360;
+  const rightLng = -180 + ((cCol + 1) / cfg.cols) * 360;
+  const dTop = haversineKm(correctLat, correctLng, topLat, correctLng);
+  const dBottom = haversineKm(correctLat, correctLng, bottomLat, correctLng);
+  const dLeft = haversineKm(correctLat, correctLng, correctLat, leftLng);
+  const dRight = haversineKm(correctLat, correctLng, correctLat, rightLng);
+  const nearestEdgeKm = Math.min(dTop, dBottom, dLeft, dRight);
+  return nearestEdgeKm <= thresholdKm;
 }

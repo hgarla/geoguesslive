@@ -12,7 +12,7 @@ import {
   Map as MapIcon,
 } from 'lucide-react';
 import type { DailyPuzzle, PuzzleLocation } from '@/types';
-import { regionForCoord, isNearRegionBorder } from '@/lib/projection';
+import { regionForCoord, isNearMissGuess } from '@/lib/projection';
 import { haversineKm, scoreFromDistance } from '@/lib/distance';
 import { WORLD_ASPECT } from '@/lib/mapBounds';
 import MapPicker from './MapPicker';
@@ -70,15 +70,15 @@ function RoundProgress({
             );
           }
           if (result.near) {
-            // Wrong region, but the click landed right next to the correct
-            // one — orange "so close!" dot.
+            // Wrong region, but the correct landmark was within ~50 mi of the
+            // border and the guess hit an adjacent region — orange "so close!".
             return (
               <div
                 key={i}
                 className="w-7 h-7 rounded-full bg-orange-500 text-white flex items-center justify-center shadow-sm font-bold text-base leading-none"
                 title={`Round ${i + 1}: so close (${result.score} pts)`}
               >
-                !
+                ~
               </div>
             );
           }
@@ -323,7 +323,9 @@ const GeoGuessGame: React.FC = () => {
     const regionIdx = regionForCoord(round, lat, lng);
     const correctIdx = regionForCoord(round, currentLocation.lat, currentLocation.lng);
     const correct = regionIdx === correctIdx;
-    const near = !correct && isNearRegionBorder(round, lat, lng, correctIdx);
+    const near =
+      !correct &&
+      isNearMissGuess(round, currentLocation.lat, currentLocation.lng, correctIdx, regionIdx);
 
     // The act of guessing clears any leftover glow from the previous round.
     // (We'll re-arm it below if this guess turns out wrong.)
@@ -668,44 +670,43 @@ const GeoGuessGame: React.FC = () => {
                 </div>
 
                 {/* Active hint info — sits below the map (in the un-hovered map's
-                    flow position) so picking a hint reveals its answer here. */}
-                <div className="flex flex-col gap-2">
-                  <div className="flex flex-col gap-1.5">
-                    {powerups.countryName.active && currentLocation && (
-                      <div className="px-2.5 py-1.5 bg-blue-50 rounded text-xs flex items-center gap-2">
-                        <span className="font-bold text-blue-700">Country:</span>
-                        <span>{currentLocation.country}</span>
-                      </div>
-                    )}
-                    {powerups.continent.active && currentLocation && (
-                      <div className="px-2.5 py-1.5 bg-green-50 rounded text-xs flex items-center gap-2">
-                        <span className="font-bold text-green-700">Continent:</span>
-                        <span>{currentLocation.demographics.continent}</span>
-                      </div>
-                    )}
-                    {powerups.capital.active && currentLocation && (
-                      <div className="px-2.5 py-1.5 bg-purple-50 rounded text-xs flex items-center gap-2">
-                        <span className="font-bold text-purple-700">Capital:</span>
-                        <span>{currentLocation.demographics.capital}</span>
-                      </div>
-                    )}
-                    {powerups.language.active && currentLocation && (
-                      <div className="px-2.5 py-1.5 bg-orange-50 rounded text-xs flex items-center gap-2">
-                        <span className="font-bold text-orange-700">Language:</span>
-                        <span>{currentLocation.demographics.language}</span>
-                      </div>
-                    )}
-                    {powerups.flag.active && currentLocation && (
-                      <div className="px-2.5 py-1.5 bg-red-50 rounded text-xs flex items-center gap-2">
-                        <span className="font-bold text-red-700">Flag:</span>
-                        <img
-                          src={currentLocation.flag}
-                          alt={`Flag of ${currentLocation.country}`}
-                          className="h-5 object-contain"
-                        />
-                      </div>
-                    )}
-                  </div>
+                    flow position). Sized big so the answer is glanceable, since
+                    the hint only sticks around for the current round. */}
+                <div className="flex flex-col gap-2.5">
+                  {powerups.countryName.active && currentLocation && (
+                    <div className="px-4 py-3 bg-blue-50 rounded-lg text-lg flex items-center gap-3 shadow-sm">
+                      <span className="font-bold text-blue-700">Country:</span>
+                      <span className="font-semibold">{currentLocation.country}</span>
+                    </div>
+                  )}
+                  {powerups.continent.active && currentLocation && (
+                    <div className="px-4 py-3 bg-green-50 rounded-lg text-lg flex items-center gap-3 shadow-sm">
+                      <span className="font-bold text-green-700">Continent:</span>
+                      <span className="font-semibold">{currentLocation.demographics.continent}</span>
+                    </div>
+                  )}
+                  {powerups.capital.active && currentLocation && (
+                    <div className="px-4 py-3 bg-purple-50 rounded-lg text-lg flex items-center gap-3 shadow-sm">
+                      <span className="font-bold text-purple-700">Capital:</span>
+                      <span className="font-semibold">{currentLocation.demographics.capital}</span>
+                    </div>
+                  )}
+                  {powerups.language.active && currentLocation && (
+                    <div className="px-4 py-3 bg-orange-50 rounded-lg text-lg flex items-center gap-3 shadow-sm">
+                      <span className="font-bold text-orange-700">Language:</span>
+                      <span className="font-semibold">{currentLocation.demographics.language}</span>
+                    </div>
+                  )}
+                  {powerups.flag.active && currentLocation && (
+                    <div className="px-4 py-4 bg-red-50 rounded-lg text-lg flex items-center gap-4 shadow-sm">
+                      <span className="font-bold text-red-700">Flag:</span>
+                      <img
+                        src={currentLocation.flag}
+                        alt={`Flag of ${currentLocation.country}`}
+                        className="h-20 max-h-[6rem] w-auto object-contain rounded shadow"
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
