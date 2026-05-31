@@ -38,68 +38,82 @@ function offsetDate(date: string, days: number): string {
   return d.toISOString().slice(0, 10);
 }
 
-// Anchor before which the no-repeat lookback stops recursing — keeps recursion
-// bounded and reproducible. Any date <= EPOCH uses raw shuffle (no exclusion).
+// Day-zero anchor. Every date <= EPOCH is treated as the first day of a fresh
+// cycle (no exclusions). The recursive walk forward from EPOCH bottoms out
+// here, so total work per cold request is O((today − EPOCH) × count).
 const EPOCH = '2026-01-01';
-const RECENT_DAYS = 7;
+const COUNT = 8;
 
-// Memoize per-date picks so the recursive lookback computes each date once.
-const dailyCache = new Map<string, SeedLocation[]>();
-
+// Shuffle the pool with the date-seeded RNG and take the first `count`
+// entries that aren't in `excluded`. The shuffle then exclusion order
+// ensures the picked set is deterministic given (date, excluded).
 function pickFromShuffle(date: string, count: number, excluded: Set<string>): SeedLocation[] {
   const seeded = xmur3('rgg:' + date);
   const rand = mulberry32(seeded());
-  const pool = seedLocations.filter(s => !excluded.has(s.name));
-
-  // Edge case: not enough non-excluded seeds — fall back to allowing repeats
-  // from oldest excluded entries, deterministically.
-  if (pool.length < count) {
-    const fallback = seedLocations.filter(s => excluded.has(s.name));
-    const seeded2 = xmur3('rgg-fb:' + date);
-    const rand2 = mulberry32(seeded2());
-    for (let i = fallback.length - 1; i > 0; i--) {
-      const j = Math.floor(rand2() * (i + 1));
-      [fallback[i], fallback[j]] = [fallback[j], fallback[i]];
-    }
-    const combined = [...pool, ...fallback];
-    for (let i = combined.length - 1; i > 0; i--) {
-      const j = Math.floor(rand() * (i + 1));
-      [combined[i], combined[j]] = [combined[j], combined[i]];
-    }
-    return combined.slice(0, count);
-  }
-
-  for (let i = pool.length - 1; i > 0; i--) {
+  const shuffled = [...seedLocations];
+  for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(rand() * (i + 1));
-    [pool[i], pool[j]] = [pool[j], pool[i]];
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
-  return pool.slice(0, count);
+  const out: SeedLocation[] = [];
+  for (const s of shuffled) {
+    if (out.length >= count) break;
+    if (excluded.has(s.name)) continue;
+    out.push(s);
+  }
+  // Safety net: if somehow excluded ate the whole pool (shouldn't happen
+  // because we reset the cycle before that), fall back to plain shuffle.
+  if (out.length < count) {
+    for (const s of shuffled) {
+      if (out.length >= count) break;
+      if (!out.includes(s)) out.push(s);
+    }
+  }
+  return out;
 }
 
-// Pick 8 distinct seed locations deterministically for the given date,
-// excluding any that appeared in the previous RECENT_DAYS days.
+// Per-date state: today's picks AND the cumulative set of every landmark
+// already shown in the current cycle (including today's picks). A "cycle"
+// is a complete pass through the seed pool — when the remaining pool drops
+// below COUNT, the next date starts a fresh cycle with an empty shown set.
 //
-// Result is cached per-date in module scope. Recursion is bounded by EPOCH:
-// dates at or before EPOCH use a raw shuffle with no exclusion, so a
-// dependency chain from today bottoms out at EPOCH. With memoization, total
-// work per request is O((today - EPOCH) × seedCount), <2ms in practice.
-export function pickDailySeeds(date: string, count = 8): SeedLocation[] {
-  const cached = dailyCache.get(date);
+// This guarantees: no landmark repeats until every entry in seedLocations
+// has been used at least once.
+type DayState = { picks: SeedLocation[]; shown: Set<string> };
+const dayCache = new Map<string, DayState>();
+
+function dayState(date: string): DayState {
+  const cached = dayCache.get(date);
   if (cached) return cached;
 
   if (date <= EPOCH) {
-    const result = pickFromShuffle(date, count, new Set());
-    dailyCache.set(date, result);
-    return result;
+    const picks = pickFromShuffle(date, COUNT, new Set());
+    const state: DayState = { picks, shown: new Set(picks.map(p => p.name)) };
+    dayCache.set(date, state);
+    return state;
   }
 
-  const excluded = new Set<string>();
-  for (let d = 1; d <= RECENT_DAYS; d++) {
-    const prev = offsetDate(date, -d);
-    for (const s of pickDailySeeds(prev, count)) excluded.add(s.name);
-  }
+  const prev = dayState(offsetDate(date, -1));
 
-  const result = pickFromShuffle(date, count, excluded);
-  dailyCache.set(date, result);
-  return result;
+  // If yesterday's cumulative `shown` leaves fewer than COUNT unseen entries
+  // in the pool, this date kicks off a fresh cycle.
+  const remaining = seedLocations.length - prev.shown.size;
+  const startFresh = remaining < COUNT;
+
+  const exclude = startFresh ? new Set<string>() : prev.shown;
+  const picks = pickFromShuffle(date, COUNT, exclude);
+  const shown = new Set(startFresh ? [] : prev.shown);
+  for (const p of picks) shown.add(p.name);
+
+  const state: DayState = { picks, shown };
+  dayCache.set(date, state);
+  return state;
+}
+
+// Pick COUNT distinct seed locations for the given date. Across consecutive
+// dates, no landmark repeats until every entry in seedLocations has appeared
+// at least once; after that the picker resets and starts a new cycle.
+export function pickDailySeeds(date: string, count = COUNT): SeedLocation[] {
+  const picks = dayState(date).picks;
+  return count === COUNT ? picks : picks.slice(0, count);
 }

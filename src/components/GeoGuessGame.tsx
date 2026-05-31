@@ -134,6 +134,11 @@ const GeoGuessGame: React.FC = () => {
   const [clickedLatLng, setClickedLatLng] = useState<{ lat: number; lng: number } | null>(null);
   const [distanceKm, setDistanceKm] = useState<number | null>(null);
   const [powerups, setPowerups] = useState<PowerupState>(initialPowerups);
+  // Persistent gold halo on the hint buttons. Set to true after any wrong
+  // guess; cleared when the player makes their next guess. So the glow
+  // survives the round transition and stays lit for the whole next round
+  // until the player either uses a hint or guesses again.
+  const [glowHints, setGlowHints] = useState(false);
 
   // Per-round outcomes — drives the round-progress dots and game-over stats.
   const [roundResults, setRoundResults] = useState<RoundResult[]>([]);
@@ -320,6 +325,10 @@ const GeoGuessGame: React.FC = () => {
     const correct = regionIdx === correctIdx;
     const near = !correct && isNearRegionBorder(round, lat, lng, correctIdx);
 
+    // The act of guessing clears any leftover glow from the previous round.
+    // (We'll re-arm it below if this guess turns out wrong.)
+    setGlowHints(false);
+
     setGuessedRegion(regionIdx);
     setIsCorrectGuess(correct);
     setIsNearMiss(near);
@@ -347,6 +356,9 @@ const GeoGuessGame: React.FC = () => {
         setGuessedRegion(null);
         setIsCorrectGuess(null);
         setIsNearMiss(null);
+        // Arm the glow for the next round if this guess was wrong (either
+        // wrong region or near-miss). Cleared when the next guess fires.
+        if (!correct) setGlowHints(true);
         setRound(r => r + 1);
       }
     }, 2200);
@@ -366,6 +378,7 @@ const GeoGuessGame: React.FC = () => {
     setDistanceKm(null);
     setPowerups(initialPowerups);
     setRoundResults([]);
+    setGlowHints(false);
     setZoom(1);
     setPan({ x: 0, y: 0 });
   };
@@ -526,22 +539,15 @@ const GeoGuessGame: React.FC = () => {
                 />
 
                 {/* Hint buttons — sit between the round dots and the map so players
-                    actually see them. After any incorrect guess (wrong region or
-                    near-miss) the still-available buttons pulse with a gold halo to
-                    nudge usage. */}
+                    actually see them. After any incorrect guess the still-available
+                    buttons pulse with a gold halo through the whole next round
+                    (cleared when the player makes their next guess). */}
                 {(() => {
-                  // Glow on any incorrect guess while the reveal is on screen.
-                  // Already-used buttons never glow.
-                  const showGlow = revealLocation && isCorrectGuess === false;
-                  const glowIf = (used: boolean) => (showGlow && !used ? ' hint-glow' : '');
-                  const btnBase = 'flex-1 aspect-square max-w-[68px] rounded-xl flex items-center justify-center transition-colors';
+                  const glowIf = (used: boolean) => (glowHints && !used ? ' hint-glow' : '');
+                  const btnBase = 'flex-1 aspect-square max-w-[72px] rounded-xl flex items-center justify-center transition-colors';
                   return (
-                    <div className="flex flex-col gap-2">
-                      <div className="text-center">
-                        <span className="text-sm font-bold text-gray-700">Hints</span>
-                      </div>
-                      <div className="flex gap-3 justify-between items-center">
-                        <button
+                    <div className="flex gap-4 justify-between items-center px-1">
+                      <button
                           className={`${btnBase} ${
                             powerups.countryName.used
                               ? 'bg-gray-200 cursor-not-allowed opacity-50'
@@ -599,9 +605,8 @@ const GeoGuessGame: React.FC = () => {
                           onClick={() => setPowerups(p => ({ ...p, flag: { active: true, used: true } }))}
                           title="Flag"
                         >
-                          <Flag className="w-7 h-7 text-white" strokeWidth={2} />
-                        </button>
-                      </div>
+                        <Flag className="w-7 h-7 text-white" strokeWidth={2} />
+                      </button>
                     </div>
                   );
                 })()}
@@ -633,7 +638,13 @@ const GeoGuessGame: React.FC = () => {
                 </div>
                 <div className="relative hidden lg:block">
                   <div style={{ aspectRatio: WORLD_ASPECT }} aria-hidden className="invisible" />
-                  <div className="absolute top-0 right-0 z-10 w-full hover:w-[280%] transition-all duration-300 ease-out hover:z-50">
+                  {/* The enlarged width is clamped by viewport height so the map
+                      never grows tall enough to push the page into scroll:
+                      width ≤ (visible_space_below_top * aspect_ratio).
+                      The 360px subtrahend reserves room for the title, score,
+                      round-dots, hint buttons, gaps, and a little breathing
+                      room above + below. */}
+                  <div className="absolute top-0 right-0 z-10 w-full hover:w-[min(280%,calc((100vh-360px)*2.8125))] transition-all duration-300 ease-out hover:z-50">
                     <div
                       className="relative rounded-lg overflow-hidden border-2 border-white shadow-xl bg-blue-50"
                       style={{ aspectRatio: WORLD_ASPECT }}
