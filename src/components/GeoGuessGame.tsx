@@ -385,8 +385,12 @@ const GeoGuessGame: React.FC = () => {
     setPan({ x: 0, y: 0 });
   };
 
+  // Natural document scroll — we used to wrap in `fixed inset-0 overflow-auto`,
+  // which trapped scroll inside a position:fixed container. On mobile that
+  // made the hint-answer pills unreachable once they overflowed the viewport.
+  // The game-over modal still uses its own fixed overlay below.
   return (
-    <div className="min-h-screen w-screen bg-blue-100 fixed inset-0 overflow-auto">
+    <div className="min-h-screen w-full bg-blue-100">
       {!gameStarted ? (
         <div className="flex flex-col items-center justify-center min-h-screen w-full px-4">
           <div className="border-4 sm:border-8 border-black px-6 py-10 sm:px-20 sm:py-16 flex flex-col items-center w-full max-w-lg">

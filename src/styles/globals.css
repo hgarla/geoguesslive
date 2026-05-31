@@ -7,17 +7,16 @@
   --foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* This game is a light-theme deliberate design (blue-100 background,
+   dark text). Do NOT honor prefers-color-scheme: dark — it was flipping
+   the page's default text color to white, which made the title and the
+   hint-answer pill text invisible on devices set to dark mode. */
 
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  color-scheme: light;
 }
 body {
   margin: 0;
