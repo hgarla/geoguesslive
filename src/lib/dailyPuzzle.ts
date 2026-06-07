@@ -50,7 +50,7 @@ function pickFromShuffle(date: string, count: number, excluded: Set<string>): Se
   // Bump SEED_VERSION to reroll every date's pick. The cumulative-shown
   // walk forward from EPOCH still works — it just produces a different
   // (still-no-repeat) cycle through the seed pool.
-  const SEED_VERSION = 'v2';
+  const SEED_VERSION = 'v3';
   const seeded = xmur3(`rgg:${SEED_VERSION}:${date}`);
   const rand = mulberry32(seeded());
   const pool = seedLocations.filter(s => !excluded.has(s.name));
